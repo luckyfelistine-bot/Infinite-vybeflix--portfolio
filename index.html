@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Vybeflix — Portfolio Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== LOADING SCREEN ===== -->
+<div class="loading-screen" id="loadingScreen">
+  <img src="https://raw.githubusercontent.com/luckyfelistine-bot/Infinite-vybeflix-portfolio/main/images/Aevibron-logo.jpg" 
+       alt="Aevibron" class="loading-logo" onerror="this.style.display='none'">
+  <div class="loading-shimmer">Infinite Vybeflix</div>
+  <div class="loading-sub">Loading Portfolio</div>
+  <div class="loading-bar">
+    <div class="loading-bar-fill"></div>
+  </div>
+  <div class="loading-percent" id="loadingPercent">0%</div>
+</div>
+
+<!-- ===== PARTICLE CANVAS ===== -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- ===== CONFETTI CANVAS ===== -->
+<canvas id="confettiCanvas"></canvas>
+
+<!-- ===== GRAIN OVERLAY ===== -->
+<div class="grain-overlay"></div>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ===== WELCOME MODAL ===== -->
+<div class="modal-overlay" id="welcomeModal">
+  <div class="modal-box">
+    <div class="modal-icon"><i class="fas fa-book-open"></i></div>
+    <h2>Welcome to My Portfolio</h2>
+    <p>This is an interactive 3D book. Here's how to navigate:</p>
+    <div class="modal-nav-tips">
+      <div class="modal-tip"><i class="fas fa-hand-pointer"></i> <span>Click the <strong>bottom-right corner</strong> of any page to flip forward</span></div>
+      <div class="modal-tip"><i class="fas fa-arrow-left"></i> <span>Click <strong>Previous / Next</strong> buttons below the book</span></div>
+      <div class="modal-tip"><i class="fas fa-keyboard"></i> <span>Use <strong>Arrow Keys</strong> (← →) on your keyboard</span></div>
+      <div class="modal-tip"><i class="fas fa-mobile-alt"></i> <span><strong>Swipe</strong> left or right on mobile devices</span></div>
+    </div>
+    <button class="modal-btn" id="modalCloseBtn">Start Exploring</button>
+  </div>
+</div>
+
+<!-- ===== SITE HEADER ===== -->
+<div class="site-header">
+  <h1>Infinite Vybeflix</h1>
+  <p>Portfolio Book — 2026</p>
+</div>
+
+<!-- ===== BOOK STAGE ===== -->
+<div class="book-stage">
+  <div class="book" id="book">
+
+    <!-- ============================================ -->
+    <!-- SHEET 0: COVER (front) | PROFILE (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 8;" data-index="0">
+      <div class="face front cover-face">
+        <img src="https://raw.githubusercontent.com/luckyfelistine-bot/Infinite-vybeflix-portfolio/main/images/Aevibron-logo.jpg" 
+             alt="Aevibron" class="cover-logo" onerror="this.style.display='none'">
+        <div class="cover-label">Portfolio 2026</div>
+        <div class="cover-name">Aevibron</div>
+        <div class="cover-title">Founder & Lead AI Architect</div>
+        <div class="cover-tagline" id="typingText">
+          <span id="typedContent"></span><span class="cursor">|</span>
+        </div>
+        <div>
+          <button class="cover-btn primary magnetic" onclick="goToPage(1)">View Projects</button>
+          <button class="cover-btn secondary magnetic" onclick="goToPage(5)">Contact Me</button>
+        </div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back page-left">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="profile-section">
+            <img src="https://raw.githubusercontent.com/luckyfelistine-bot/Infinite-vybeflix-portfolio/main/images/Aevibron-advert.png" 
+                 alt="Aevibron" class="profile-avatar" onerror="this.style.display='none'">
+            <div class="profile-name">Aevibron</div>
+            <div class="profile-role">Founder & Lead AI Architect</div>
+            <div class="social-row">
+              <a href="https://github.com" class="social-icon magnetic" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://linkedin.com" class="social-icon magnetic" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://x.com" class="social-icon magnetic" target="_blank" title="X/Twitter"><i class="fab fa-x-twitter"></i></a>
+              <a href="mailto:aevibron@gmail.com" class="social-icon magnetic" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="profile-bio">
+              I architect AI-powered ecosystems — from <strong>Nuvuja</strong> (AI IDE) to <strong>Aevibron Gateway</strong> (1M req/min API infrastructure). 
+              Self-taught builder turning complex ideas into production-grade systems that scale.
+            </p>
+            <div class="btn-row">
+              <a href="#" class="btn btn-primary magnetic" onclick="goToPage(6); return false;"><i class="fas fa-file-alt"></i> View CV</a>
+              <a href="#" class="btn btn-outline magnetic" onclick="goToPage(5); return false;"><i class="fas fa-paper-plane"></i> Contact Me</a>
+            </div>
+          </div>
+        </div>
+        <div class="page-number left">1</div>
+        <div class="corner-back" onclick="flipPrev()"></div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SHEET 1: WORK EXPERIENCE (front) | EDUCATION (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 7;" data-index="1">
+      <div class="bookmark-ribbon"></div>
+      <div class="face front page-right">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">Work Experience</div>
+          <div class="timeline">
+            <div class="timeline-item observe">
+              <div class="timeline-date">2024 — Present</div>
+              <div class="timeline-title">Founder & Lead Developer</div>
+              <div class="timeline-company">Aevibron / Infinite Vybeflix</div>
+              <div class="timeline-desc">
+                Architecting AI-powered tools: Nuvuja (AI IDE with console-aware fixing), Aevibron Gateway 
+                (unlimited AI API, 1M+ req/min), IRIS (autonomous AI engineer), Kaelum (Termux-native AI), 
+                and Maureonix (700+ command WhatsApp bot).
+              </div>
+            </div>
+            <div class="timeline-item observe">
+              <div class="timeline-date">2023 — 2024</div>
+              <div class="timeline-title">Independent Full-Stack Developer</div>
+              <div class="timeline-company">Freelance & Open Source</div>
+              <div class="timeline-desc">
+                Delivered full-stack applications, AI automations, and Firebase backends for global clients. 
+                Specialized in React, Node.js, LLM integrations, and real-time systems.
+              </div>
+            </div>
+            <div class="timeline-item observe">
+              <div class="timeline-date">2021 — 2023</div>
+              <div class="timeline-title">Self-Taught Developer</div>
+              <div class="timeline-company">Continuous Learning & Building</div>
+              <div class="timeline-desc">
+                Mastered JavaScript ecosystems, cloud architecture, and AI APIs through relentless building. 
+                Launched first production tools and established the Aevibron brand identity.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-number right">2</div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back page-left">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">Education</div>
+          <div class="timeline">
+            <div class="timeline-item observe">
+              <div class="timeline-date">2021 — Present</div>
+              <div class="timeline-title">Mastery in AI Systems & Architecture</div>
+              <div class="timeline-company">Self-Directed / Production-Grade Learning</div>
+              <div class="timeline-desc">
+                Deep-dive into LLM orchestration, API gateway design, autonomous agent frameworks, 
+                and full-stack deployment at scale. Learned by shipping production systems.
+              </div>
+            </div>
+            <div class="timeline-item observe">
+              <div class="timeline-date">2020 — 2021</div>
+              <div class="timeline-title">Advanced Software Engineering Track</div>
+              <div class="timeline-company">Intensive Bootcamp & Real-World Practice</div>
+              <div class="timeline-desc">
+                Intensive focus on React, Node.js, Firebase, REST API design, and cloud functions. 
+                Built 10+ projects from scratch.
+              </div>
+            </div>
+            <div class="timeline-item observe">
+              <div class="timeline-date">2019 — 2020</div>
+              <div class="timeline-title">Foundation in Computer Science</div>
+              <div class="timeline-company">Programming Logic & System Design</div>
+              <div class="timeline-desc">
+                Built strong fundamentals in algorithms, data structures, and software architecture 
+                through online coursework and competitive practice.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-number left">3</div>
+        <div class="corner-back" onclick="flipPrev()"></div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SHEET 2: SERVICES (front) | SKILLS (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 6;" data-index="2">
+      <div class="bookmark-ribbon"></div>
+      <div class="face front page-right">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">My Services</div>
+          <div class="services-grid">
+            <div class="service-card magnetic">
+              <div class="service-icon"><i class="fas fa-code"></i></div>
+              <div class="service-title">Web Development</div>
+              <div class="service-desc">Full-stack apps with React, Node.js, and clean scalable architecture.</div>
+              <button class="service-btn">Learn More</button>
+            </div>
+            <div class="service-card magnetic">
+              <div class="service-icon"><i class="fas fa-robot"></i></div>
+              <div class="service-title">AI Automation</div>
+              <div class="service-desc">LLM workflows, smart routing, and autonomous agent systems.</div>
+              <button class="service-btn">Learn More</button>
+            </div>
+            <div class="service-card magnetic">
+              <div class="service-icon"><i class="fas fa-server"></i></div>
+              <div class="service-title">API Infrastructure</div>
+              <div class="service-desc">High-performance gateways handling millions of requests per minute.</div>
+              <button class="service-btn">Learn More</button>
+            </div>
+            <div class="service-card magnetic">
+              <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+              <div class="service-title">Bot Development</div>
+              <div class="service-desc">WhatsApp & Telegram bots with 700+ commands and AI conversations.</div>
+              <button class="service-btn">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="page-number right">4</div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back page-left">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">My Skills</div>
+          <div class="skills-section">
+            <div class="skills-label"><i class="fas fa-laptop-code"></i> Front-End</div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span class="skill-bar-name">React / Next.js</span><span class="skill-bar-percent">95%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span class="skill-bar-name">JavaScript / TypeScript</span><span class="skill-bar-percent">92%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span class="skill-bar-name">HTML5 / CSS3</span><span class="skill-bar-percent">90%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+            </div>
+          </div>
+          <div class="skills-section">
+            <div class="skills-label"><i class="fas fa-database"></i> Back-End & Cloud</div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span class="skill-bar-name">Node.js</span><span class="skill-bar-percent">88%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span class="skill-bar-name">Firebase</span><span class="skill-bar-percent">85%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span class="skill-bar-name">Python</span><span class="skill-bar-percent">78%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div>
+            </div>
+          </div>
+          <div class="skills-section">
+            <div class="skills-label"><i class="fas fa-brain"></i> AI & Tools</div>
+            <div class="skills-row">
+              <div class="skill-item magnetic"><i class="fas fa-brain" style="color:#10a37f"></i><span>OpenAI</span></div>
+              <div class="skill-item magnetic"><i class="fas fa-microchip" style="color:#f55"></i><span>Groq</span></div>
+              <div class="skill-item magnetic"><i class="fab fa-github" style="color:#333"></i><span>GitHub</span></div>
+              <div class="skill-item magnetic"><i class="fab fa-figma" style="color:#f24e1e"></i><span>Figma</span></div>
+              <div class="skill-item magnetic"><i class="fas fa-terminal" style="color:#000"></i><span>Termux</span></div>
+              <div class="skill-item magnetic"><i class="fas fa-cloud" style="color:#0ea5e9"></i><span>Vercel</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="page-number left">5</div>
+        <div class="corner-back" onclick="flipPrev()"></div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SHEET 3: NUVUJA FEATURED (front) | PROJECTS LIST (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 5;" data-index="3">
+      <div class="bookmark-ribbon"></div>
+      <div class="face front page-right">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">Latest Project</div>
+          <div class="project-featured">
+            <div class="project-img-wrap">
+              <img src="https://raw.githubusercontent.com/luckyfelistine-bot/Infinite-vybeflix-portfolio/main/images/Nuvuja-advert.png" 
+                   alt="Nuvuja" class="project-img" onerror="this.style.display='none'">
+              <div class="project-img-overlay"></div>
+            </div>
+            <div class="project-name">Nuvuja</div>
+            <a href="https://nuvuja.vercel.app" class="project-link" target="_blank">
+              <i class="fas fa-external-link-alt"></i> nuvuja.vercel.app
+            </a>
+            <div class="project-tech">React · Monaco Editor · AI APIs · WebSockets · Firebase</div>
+            <div class="project-desc">
+              An intelligent IDE where AI codes directly in the editor, reads console output, applies automatic fixes, 
+              and understands your codebase in real-time. Built for developers who want to ship faster.
+            </div>
+            <ul class="project-bullets">
+              <li>Live preview with instant rendering and hot reload</li>
+              <li>Console integration — AI reads errors & auto-fixes them</li>
+              <li>Multi-file support with intelligent context awareness</li>
+              <li>Real-time collaboration via WebSockets</li>
+            </ul>
+            <div class="btn-row">
+              <a href="https://nuvuja.vercel.app" class="btn btn-primary magnetic" target="_blank"><i class="fas fa-code"></i> Live Demo</a>
+              <a href="https://nuvuja.vercel.app" class="btn btn-outline magnetic" target="_blank"><i class="fas fa-rocket"></i> Try It</a>
+            </div>
+          </div>
+        </div>
+        <div class="page-number right">6</div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back page-left">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">My Projects</div>
+          <div class="project-list">
+            <div class="project-row magnetic">
+              <div class="project-row-info">
+                <div class="project-row-name">Aevibron Gateway</div>
+                <div class="project-row-desc">Unlimited AI API with up to 1M requests/min. Image & text generation infrastructure.</div>
+              </div>
+              <a href="https://aevibron-gateway.vercel.app" target="_blank"><button class="project-row-btn">View</button></a>
+            </div>
+            <div class="project-row magnetic">
+              <div class="project-row-info">
+                <div class="project-row-name">IRIS</div>
+                <div class="project-row-desc">Autonomous AI software engineer. Manages deployments, API keys, and the entire ecosystem.</div>
+              </div>
+              <button class="project-row-btn soon">Soon</button>
+            </div>
+            <div class="project-row magnetic">
+              <div class="project-row-info">
+                <div class="project-row-name">Kaelum</div>
+                <div class="project-row-desc">Terminal-native AI running on Termux. Full system control through natural language.</div>
+              </div>
+              <button class="project-row-btn personal">Personal</button>
+            </div>
+            <div class="project-row magnetic">
+              <div class="project-row-info">
+                <div class="project-row-name">Maureonix</div>
+                <div class="project-row-desc">WhatsApp bot with 700+ working commands. From utilities to AI conversations.</div>
+              </div>
+              <button class="project-row-btn personal">Personal</button>
+            </div>
+          </div>
+        </div>
+        <div class="page-number left">7</div>
+        <div class="corner-back" onclick="flipPrev()"></div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SHEET 4: GATEWAY FEATURED (front) | CONTACT FORM (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 4;" data-index="4">
+      <div class="bookmark-ribbon"></div>
+      <div class="face front page-right">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">Featured Work</div>
+          <div class="project-featured">
+            <div class="project-img-wrap">
+              <img src="https://raw.githubusercontent.com/luckyfelistine-bot/Infinite-vybeflix-portfolio/main/images/Aevibron-gateway.png" 
+                   alt="Aevibron Gateway" class="project-img" onerror="this.style.display='none'">
+              <div class="project-img-overlay"></div>
+            </div>
+            <div class="project-name">Aevibron Gateway</div>
+            <a href="https://aevibron-gateway.vercel.app" class="project-link" target="_blank">
+              <i class="fas fa-external-link-alt"></i> aevibron-gateway.vercel.app
+            </a>
+            <div class="project-tech">Node.js · Vercel · AI APIs · Rate Limiting · Auth · Analytics</div>
+            <div class="project-desc">
+              The infrastructure powering unlimited AI access. Generate images and text at scale 
+              with up to 1 million requests per minute. Built for developers who refuse limits.
+            </div>
+            <ul class="project-bullets">
+              <li>Unlimited API keys with granular access control</li>
+              <li>1M+ requests/minute throughput on free tier</li>
+              <li>Image & text generation endpoints (OpenAI, Groq, etc.)</li>
+              <li>Real-time usage analytics and health monitoring</li>
+            </ul>
+            <div class="btn-row">
+              <a href="https://aevibron-gateway.vercel.app" class="btn btn-primary magnetic" target="_blank"><i class="fas fa-key"></i> Get API Key</a>
+              <a href="https://aevibron-gateway.vercel.app" class="btn btn-outline magnetic" target="_blank"><i class="fas fa-book"></i> Docs</a>
+            </div>
+          </div>
+        </div>
+        <div class="page-number right">8</div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back page-left">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="page-title">Contact Me!</div>
+
+          <form id="emailForm" style="margin-bottom:16px;">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="emailName" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="emailEmail" placeholder="you@email.com" required>
+            </div>
+            <div class="form-group">
+              <label>Your Message</label>
+              <textarea id="emailMessage" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit magnetic"><i class="fas fa-envelope"></i> Send via Email</button>
+          </form>
+
+          <div style="text-align:center;margin:10px 0;font-size:0.68rem;color:var(--text-muted);font-weight:600;">— OR —</div>
+
+          <div class="form-group">
+            <label style="margin-bottom:8px;">Message via WhatsApp</label>
+            <div class="whatsapp-options">
+              <div class="whatsapp-opt active magnetic" data-mode="prefill">
+                <i class="fab fa-whatsapp" style="color:#25d366"></i>
+                Pre-fill Message
+              </div>
+              <div class="whatsapp-opt magnetic" data-mode="chat">
+                <i class="fab fa-whatsapp" style="color:#25d366"></i>
+                Open Chat
+              </div>
+            </div>
+            <input type="text" id="waName" placeholder="Your name (optional)" style="margin-bottom:8px;">
+            <textarea id="waMessage" placeholder="Type your message here..."></textarea>
+          </div>
+          <div class="whatsapp-preview" id="waPreview">
+            <strong>Preview:</strong> <span id="waPreviewText"></span>
+          </div>
+          <button class="form-submit magnetic" id="waSubmit" style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);">
+            <i class="fab fa-whatsapp"></i> Open WhatsApp with Message
+          </button>
+        </div>
+        <div class="page-number left">9</div>
+        <div class="corner-back" onclick="flipPrev()"></div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SHEET 5: GET IN TOUCH (front) | OPEN TO WORK (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 3;" data-index="5">
+      <div class="bookmark-ribbon"></div>
+      <div class="face front page-right">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="contact-block">
+            <img src="https://raw.githubusercontent.com/luckyfelistine-bot/Infinite-vybeflix-portfolio/main/images/Aevibron-advert.png" 
+                 alt="Aevibron" class="profile-avatar" onerror="this.style.display='none'">
+            <a href="mailto:aevibron@gmail.com" class="contact-email">aevibron@gmail.com</a>
+            <div class="contact-status">Available for freelance & contract work</div>
+            <div class="social-row">
+              <a href="https://github.com" class="social-icon magnetic" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://linkedin.com" class="social-icon magnetic" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://x.com" class="social-icon magnetic" target="_blank"><i class="fab fa-x-twitter"></i></a>
+              <a href="mailto:aevibron@gmail.com" class="social-icon magnetic"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="contact-meta">
+              <div class="contact-meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <div class="contact-meta-label">Location</div>
+                  <div>Nairobi, Kenya — Remote OK Worldwide</div>
+                </div>
+              </div>
+              <div class="contact-meta-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                  <div class="contact-meta-label">Response Time</div>
+                  <div>Within 24 hours</div>
+                </div>
+              </div>
+              <div class="contact-meta-item">
+                <i class="fas fa-crosshairs"></i>
+                <div>
+                  <div class="contact-meta-label">Focus Areas</div>
+                  <div>React · Firebase · AI Automation · API Design</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-number right">10</div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back page-left">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner" style="justify-content:center;">
+          <div class="open-work">
+            <div class="open-work-icon"><i class="fas fa-star"></i></div>
+            <h3>Open to Work</h3>
+            <p>
+              Looking for your next AI integration, full-stack build, or automation project? 
+              I turn complex ideas into production reality. Let's build something extraordinary.
+            </p>
+            <a href="https://wa.me/254116903500" class="btn btn-primary magnetic" target="_blank" style="padding:11px 28px;font-size:0.8rem;" id="hireBtn">
+              <i class="fab fa-whatsapp"></i> Let's Talk on WhatsApp
+            </a>
+            <div style="margin-top:14px;font-size:0.68rem;color:var(--text-muted);">
+              Or email: <a href="mailto:aevibron@gmail.com" style="color:var(--primary);">aevibron@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="page-number left">11</div>
+        <div class="corner-back" onclick="flipPrev()"></div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SHEET 6: CV PAGE 1 (front) | CV PAGE 2 (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 2;" data-index="6">
+      <div class="bookmark-ribbon"></div>
+      <div class="face front page-right">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="cv-header">
+            <div class="cv-header-name">Aevibron</div>
+            <div class="cv-header-title">Founder & Lead AI Architect · Full-Stack Developer</div>
+            <div class="cv-header-contact">
+              <span><i class="fas fa-envelope" style="color:var(--primary)"></i> aevibron@gmail.com</span>
+              <span><i class="fas fa-phone" style="color:var(--primary)"></i> +254 116 903 500</span>
+              <span><i class="fas fa-globe" style="color:var(--primary)"></i> Nairobi, Kenya — Remote</span>
+            </div>
+          </div>
+
+          <div class="cv-metric-row">
+            <div class="cv-metric">
+              <span class="cv-metric-num counter-num" data-target="5">0</span>
+              <span class="cv-metric-label">Years Building</span>
+            </div>
+            <div class="cv-metric">
+              <span class="cv-metric-num counter-num" data-target="10">0</span>
+              <span class="cv-metric-label">Production Projects</span>
+            </div>
+            <div class="cv-metric">
+              <span class="cv-metric-num counter-num" data-target="1">0</span>
+              <span class="cv-metric-label">Million Req/Min</span>
+            </div>
+          </div>
+
+          <div class="cv-highlight-box">
+            <h4><i class="fas fa-user"></i> Professional Summary</h4>
+            <p>
+              Visionary AI architect and full-stack developer with a proven track record of building 
+              production-grade systems from scratch. Founded Aevibron (Infinite Vybeflix) and shipped 
+              multiple AI-powered products including an intelligent IDE, unlimited API gateway, autonomous 
+              AI engineer, and a 700+ command WhatsApp bot. Self-taught, relentlessly iterative, 
+              and obsessed with turning complex ideas into scalable reality.
+            </p>
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title"><i class="fas fa-bullseye"></i> Core Competencies</div>
+            <div class="cv-skills-grid">
+              <div class="cv-skill-cat">
+                <div class="cv-skill-cat-name">AI & LLMs</div>
+                <div class="cv-skill-tags">
+                  <span class="cv-skill-tag">OpenAI API</span>
+                  <span class="cv-skill-tag">Groq</span>
+                  <span class="cv-skill-tag">LLM Orchestration</span>
+                  <span class="cv-skill-tag">Prompt Engineering</span>
+                  <span class="cv-skill-tag">Agent Frameworks</span>
+                </div>
+              </div>
+              <div class="cv-skill-cat">
+                <div class="cv-skill-cat-name">Full-Stack</div>
+                <div class="cv-skill-tags">
+                  <span class="cv-skill-tag">React / Next.js</span>
+                  <span class="cv-skill-tag">Node.js</span>
+                  <span class="cv-skill-tag">Firebase</span>
+                  <span class="cv-skill-tag">REST / GraphQL</span>
+                  <span class="cv-skill-tag">WebSockets</span>
+                </div>
+              </div>
+              <div class="cv-skill-cat">
+                <div class="cv-skill-cat-name">Infrastructure</div>
+                <div class="cv-skill-tags">
+                  <span class="cv-skill-tag">Vercel</span>
+                  <span class="cv-skill-tag">API Gateway Design</span>
+                  <span class="cv-skill-tag">Rate Limiting</span>
+                  <span class="cv-skill-tag">Auth Systems</span>
+                  <span class="cv-skill-tag">Cloud Functions</span>
+                </div>
+              </div>
+              <div class="cv-skill-cat">
+                <div class="cv-skill-cat-name">Tools & DevOps</div>
+                <div class="cv-skill-tags">
+                  <span class="cv-skill-tag">Git / GitHub</span>
+                  <span class="cv-skill-tag">Figma</span>
+                  <span class="cv-skill-tag">Termux / Linux</span>
+                  <span class="cv-skill-tag">CI/CD</span>
+                  <span class="cv-skill-tag">Analytics</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-number right">12</div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back page-left">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="cv-section">
+            <div class="cv-section-title"><i class="fas fa-briefcase"></i> Professional Experience</div>
+
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Founder & Lead AI Architect</span>
+                <span class="cv-item-date">2024 — Present</span>
+              </div>
+              <div class="cv-item-sub">Aevibron / Infinite Vybeflix · Nairobi, Kenya (Remote)</div>
+              <div class="cv-item-desc">
+                Architected and shipped 5+ production AI products from zero. Built Nuvuja (AI IDE with console-aware debugging), 
+                Aevibron Gateway (handling 1M+ req/min), IRIS (autonomous deployment AI), Kaelum (Termux AI), 
+                and Maureonix (700+ command WhatsApp bot). Managed end-to-end product lifecycle, API infrastructure, 
+                and brand growth.
+              </div>
+            </div>
+
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Independent Full-Stack Developer</span>
+                <span class="cv-item-date">2023 — 2024</span>
+              </div>
+              <div class="cv-item-sub">Freelance & Open Source · Global Clients</div>
+              <div class="cv-item-desc">
+                Delivered custom full-stack applications, AI automations, and Firebase backends for international clients. 
+                Specialized in React dashboards, Node.js APIs, LLM integrations, and real-time data systems. 
+                Maintained 100% client satisfaction across 15+ projects.
+              </div>
+            </div>
+
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Self-Directed Software Engineer</span>
+                <span class="cv-item-date">2021 — 2023</span>
+              </div>
+              <div class="cv-item-sub">Continuous Learning & Building</div>
+              <div class="cv-item-desc">
+                Mastered modern JavaScript ecosystems, cloud architecture, and AI APIs through intensive self-study 
+                and hands-on building. Launched first production tools, contributed to open source, and established 
+                the technical foundation for the Aevibron ecosystem.
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title"><i class="fas fa-graduation-cap"></i> Education & Certifications</div>
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Mastery in AI Systems & Architecture</span>
+                <span class="cv-item-date">2021 — Present</span>
+              </div>
+              <div class="cv-item-sub">Self-Directed · Production-Grade Learning</div>
+              <div class="cv-item-desc">
+                Deep expertise in LLM orchestration, API gateway design, autonomous agent frameworks, 
+                and scalable full-stack deployment. Learned exclusively through shipping production systems.
+              </div>
+            </div>
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Advanced Software Engineering</span>
+                <span class="cv-item-date">2020 — 2021</span>
+              </div>
+              <div class="cv-item-sub">Intensive Bootcamp & Real-World Practice</div>
+              <div class="cv-item-desc">
+                Intensive training in React, Node.js, Firebase, REST API design, and cloud functions. 
+                Built 10+ portfolio projects from scratch including e-commerce and analytics dashboards.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-number left">13</div>
+        <div class="corner-back" onclick="flipPrev()"></div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SHEET 7: CV PAGE 3 (front) | BACK COVER (back) -->
+    <!-- ============================================ -->
+    <div class="sheet" style="z-index: 1;" data-index="7">
+      <div class="bookmark-ribbon"></div>
+      <div class="face front page-right">
+        <div class="page-accent-bar"></div>
+        <div class="page-inner">
+          <div class="cv-section">
+            <div class="cv-section-title"><i class="fas fa-project-diagram"></i> Key Projects</div>
+
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Nuvuja — AI-Powered IDE</span>
+                <span class="cv-item-date">Live</span>
+              </div>
+              <div class="cv-item-sub">React · Monaco Editor · AI APIs · WebSockets · Firebase</div>
+              <div class="cv-item-desc">
+                Intelligent code editor where AI writes, debugs, and fixes code in real-time. 
+                Features console integration, multi-file context, and live preview. 
+                <a href="https://nuvuja.vercel.app" target="_blank" style="color:var(--primary);">nuvuja.vercel.app</a>
+              </div>
+            </div>
+
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Aevibron Gateway — AI API Infrastructure</span>
+                <span class="cv-item-date">Live</span>
+              </div>
+              <div class="cv-item-sub">Node.js · Vercel · Auth · Rate Limiting · Analytics</div>
+              <div class="cv-item-desc">
+                Unlimited AI API gateway supporting 1M+ requests/minute. Provides image & text generation 
+                endpoints with granular key management and real-time monitoring. 
+                <a href="https://aevibron-gateway.vercel.app" target="_blank" style="color:var(--primary);">aevibron-gateway.vercel.app</a>
+              </div>
+            </div>
+
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">IRIS — Autonomous AI Engineer</span>
+                <span class="cv-item-date">In Development</span>
+              </div>
+              <div class="cv-item-sub">AI Agents · Automation · DevOps</div>
+              <div class="cv-item-desc">
+                Fully autonomous AI that manages deployments, generates and rotates API keys, 
+                monitors system health, and handles the entire Aevibron infrastructure autonomously.
+              </div>
+            </div>
+
+            <div class="cv-item">
+              <div class="cv-item-header">
+                <span class="cv-item-title">Maureonix — WhatsApp AI Bot</span>
+                <span class="cv-item-date">Live</span>
+              </div>
+              <div class="cv-item-sub">Node.js · WhatsApp API · AI Integration</div>
+              <div class="cv-item-desc">
+                Feature-rich WhatsApp bot with 700+ working commands spanning utilities, 
+                entertainment, AI conversations, and system automation.
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title"><i class="fas fa-trophy"></i> Achievements & Recognition</div>
+            <div class="cv-item-desc" style="border-left:2px solid var(--accent);padding-left:10px;">
+              <strong>Built from zero to production</strong> — No formal CS degree. Every skill was forged through 
+              shipping real products used by real people. Architected systems handling millions of requests. 
+              Created a brand (Aevibron) that stands for "Nothing is impossible."
+            </div>
+          </div>
+
+          <div class="cv-highlight-box" style="margin-top:10px;">
+            <h4><i class="fas fa-quote-left"></i> Philosophy</h4>
+            <p style="font-style:italic;">
+              "I don't just write code — I architect ecosystems. Every line is a decision, 
+              every product is a statement. The future belongs to those who build it."
+            </p>
+          </div>
+        </div>
+        <div class="page-number right">14</div>
+        <div class="corner" onclick="flipNext()"></div>
+      </div>
+      <div class="face back back-cover-face">
+        <img src="https://raw.githubusercontent.com/luckyfelistine-bot/Infinite-vybeflix-portfolio/main/images/Aevibron-logo.jpg" 
+             alt="Aevibron" class="cover-logo" style="width:80px;height:80px;margin-bottom:14px;" onerror="this.style.display='none'">
+        <div class="monogram">A</div>
+        <div class="cover-tagline">Thank you for reading.</div>
+        <div class="cover-name" style="font-size:1.3rem;margin-bottom:4px;">Aevibron</div>
+        <div class="cover-title" style="font-size:0.68rem;letter-spacing:3px;">Eternal Vibration Particle</div>
+        <div class="back-divider"></div>
+        <div class="back-quote">"Nothing is impossible."</div>
+        <div style="margin-top:18px;font-size:0.62rem;color:#64748b;">
+          <i class="fas fa-envelope" style="margin-right:5px;"></i>aevibron@gmail.com
+          <span style="margin:0 8px;">·</span>
+          <i class="fab fa-whatsapp" style="margin-right:5px;"></i>+254 116 903 500
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /book -->
+</div><!-- /book-stage -->
+
+<!-- ===== CONTROLS ===== -->
+<div class="controls">
+  <button class="control-btn" id="btnPrev" onclick="flipPrev()">
+    <i class="fas fa-chevron-left"></i> Previous
+  </button>
+  <button class="control-btn" id="btnNext" onclick="flipNext()">
+    Next <i class="fas fa-chevron-right"></i>
+  </button>
+</div>
+<div class="page-counter" id="pageCounter">0 / 8</div>
+
+<script src="script.js"></script>
+</body>
+</html>
