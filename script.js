@@ -1,207 +1,110 @@
-const book = document.getElementById('book');
-const sheets = document.querySelectorAll('.sheet');
-let currentSheet = 0;
-const totalSheets = 8;
-let isFlipping = false;
-
-/* ═══════ AUDIO — Page Flip Sound ═══════ */
-let audioCtx = null;
-function playFlipSound() {
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.15);
-    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
-    osc.start(audioCtx.currentTime);
-    osc.stop(audioCtx.currentTime + 0.15);
-  } catch(e) {}
-}
-
-/* ═══════ GENERATE STARS ═══════ */
-const starsLayer = document.getElementById('stars-layer');
-
-for (let i = 0; i < 180; i++) {
-  const star = document.createElement('div');
-  star.className = 'star';
-  const size = 1 + Math.random() * 2.5;
-  star.style.width = size + 'px';
-  star.style.height = size + 'px';
-  star.style.left = Math.random() * 100 + '%';
-  star.style.top = Math.random() * 100 + '%';
-  star.style.setProperty('--min-op', (0.2 + Math.random() * 0.3).toFixed(2));
-  star.style.setProperty('--max-op', (0.6 + Math.random() * 0.4).toFixed(2));
-  star.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
-  star.style.animationDelay = Math.random() * 4 + 's';
-  starsLayer.appendChild(star);
-}
-
-for (let i = 0; i < 6; i++) {
-  const shoot = document.createElement('div');
-  shoot.className = 'shooting-star';
-  shoot.style.left = (Math.random() * 60) + '%';
-  shoot.style.top = (Math.random() * 40) + '%';
-  shoot.style.setProperty('--shoot-dur', (5 + Math.random() * 7) + 's');
-  shoot.style.setProperty('--shoot-delay', (Math.random() * 12) + 's');
-  starsLayer.appendChild(shoot);
-}
-
-/* ═══════ RESPONSIVE SCALING ═══════ */
-function updateScale() {
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const bookW = 840;
-  const bookH = 960;
-  const padX = 50;
-  const padY = 140;
-  const scale = Math.min(1, (vw - padX) / bookW, (vh - padY) / bookH);
-  document.documentElement.style.setProperty('--scale', scale);
-}
-
-window.addEventListener('resize', updateScale);
-updateScale();
-
-/* ═══════ Z-INDEX MANAGEMENT ═══════ */
-function updateZ() {
-  sheets.forEach((sheet, i) => {
-    const isFlipped = sheet.classList.contains('flipped');
-    if (isFlipped) {
-      sheet.style.zIndex = i + 1;
-    } else {
-      sheet.style.zIndex = (totalSheets - i) * 10;
-    }
-  });
-}
-
-/* ═══════ FLIP FUNCTIONS ═══════ */
-function flipNext() {
-  if (currentSheet >= totalSheets || isFlipping) return;
-  isFlipping = true;
-  playFlipSound();
-
-  const sheet = sheets[currentSheet];
-  sheet.style.zIndex = 999;
-  sheet.classList.add('flipped');
-
-  currentSheet++;
-  if (currentSheet > 0) book.classList.add('open');
-
-  setTimeout(() => {
-    updateZ();
-    updateDots();
-    animateSkills();
-    isFlipping = false;
-  }, 1000);
-}
-
-function flipPrev() {
-  if (currentSheet <= 0 || isFlipping) return;
-  isFlipping = true;
-  playFlipSound();
-
-  currentSheet--;
-  const sheet = sheets[currentSheet];
-  sheet.style.zIndex = 999;
-  sheet.classList.remove('flipped');
-
-  if (currentSheet === 0) book.classList.remove('open');
-
-  setTimeout(() => {
-    updateZ();
-    updateDots();
-    animateSkills();
-    isFlipping = false;
-  }, 1000);
-}
-
-function jumpToSheet(index) {
-  if (index === currentSheet || isFlipping) return;
-
-  if (index > currentSheet) {
-    let remaining = index - currentSheet;
-    function step() {
-      if (remaining > 0 && !isFlipping) {
-        flipNext();
-        remaining--;
-        if (remaining > 0) setTimeout(step, 400);
-      }
-    }
-    step();
-  } else {
-    let remaining = currentSheet - index;
-    function step() {
-      if (remaining > 0 && !isFlipping) {
-        flipPrev();
-        remaining--;
-        if (remaining > 0) setTimeout(step, 400);
-      }
-    }
-    step();
-  }
-}
-
-function updateDots() {
-  document.querySelectorAll('.nav-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === currentSheet);
-  });
-}
-
-// Initialize
-updateZ();
-
-/* ═══════ KEYBOARD ═══════ */
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); flipNext(); }
-  else if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); flipPrev(); }
-});
-
-/* ═══════ SWIPE ═══════ */
-let tsX = 0;
-document.addEventListener('touchstart', (e) => { tsX = e.changedTouches[0].screenX; }, { passive: true });
-document.addEventListener('touchend', (e) => {
-  const dx = e.changedTouches[0].screenX - tsX;
-  if (Math.abs(dx) > 50) dx < 0 ? flipNext() : flipPrev();
-}, { passive: true });
-
-/* ═══════ CLICK TO FLIP ═══════ */
-const bookScaler = document.getElementById('book-scaler');
-bookScaler.addEventListener('click', (e) => {
-  if (e.target.closest('.corner') || e.target.closest('a') || e.target.closest('button') || e.target.closest('.screenshot-wrap') || e.target.closest('.project-card') || e.target.closest('.service-card') || e.target.closest('.nav-dot')) return;
-  const rect = bookScaler.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  if (x > rect.width * 0.55) flipNext();
-  else if (x < rect.width * 0.45) flipPrev();
-});
-
-/* ═══════ CUSTOM CURSOR ═══════ */
-const cursor = document.getElementById('cursor');
-const spotlight = document.getElementById('cursor-spotlight');
+/* ═══════════════════════════════════════════
+   PARTICLE NETWORK CANVAS
+   ═══════════════════════════════════════════ */
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
 let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
+let w, h;
 
-if (cursor && spotlight) {
+function resizeCanvas() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.vx = (Math.random() - 0.5) * 0.4;
+    this.vy = (Math.random() - 0.5) * 0.4;
+    this.size = Math.random() * 1.5 + 0.5;
+    this.alpha = Math.random() * 0.5 + 0.2;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > w) this.vx *= -1;
+    if (this.y < 0 || this.y > h) this.vy *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(212,175,55,${this.alpha})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, w, h);
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  // Draw connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(212,175,55,${0.08 * (1 - dist / 150)})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+    // Mouse connection
+    const mdx = particles[i].x - mouseX;
+    const mdy = particles[i].y - mouseY;
+    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+    if (mdist < 200) {
+      ctx.beginPath();
+      ctx.moveTo(particles[i].x, particles[i].y);
+      ctx.lineTo(mouseX, mouseY);
+      ctx.strokeStyle = `rgba(56,189,248,${0.1 * (1 - mdist / 200)})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+   ═══════════════════════════════════════════ */
+const cursor = document.getElementById('cursor');
+let cx = 0, cy = 0;
+let tx = 0, ty = 0;
+
+if (cursor && !window.matchMedia('(pointer: coarse)').matches) {
   document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    spotlight.style.left = mouseX + 'px';
-    spotlight.style.top = mouseY + 'px';
+    tx = e.clientX;
+    ty = e.clientY;
   });
 
-  function animateCursor() {
-    cursorX += (mouseX - cursorX) * 0.15;
-    cursorY += (mouseY - cursorY) * 0.15;
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-    requestAnimationFrame(animateCursor);
+  function updateCursor() {
+    cx += (tx - cx) * 0.15;
+    cy += (ty - cy) * 0.15;
+    cursor.style.left = cx + 'px';
+    cursor.style.top = cy + 'px';
+    requestAnimationFrame(updateCursor);
   }
-  animateCursor();
+  updateCursor();
 
-  document.querySelectorAll('a, button, .corner, .nav-dot, .screenshot-wrap, .project-card, .service-card, .skill-tag').forEach(el => {
+  document.querySelectorAll('a, button, .nav-toggle, .bento-card, .project-card, .skill-tag, .plink-api').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
@@ -212,63 +115,84 @@ if (cursor && spotlight) {
   });
 }
 
-/* ═══════ CLICK RIPPLES ═══════ */
-document.addEventListener('click', (e) => {
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-  const ripple = document.createElement('div');
-  ripple.className = 'ripple';
-  ripple.style.left = (e.clientX - 100) + 'px';
-  ripple.style.top = (e.clientY - 100) + 'px';
-  document.body.appendChild(ripple);
-  setTimeout(() => ripple.remove(), 600);
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════ */
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => revealObserver.observe(el));
+
+/* ═══════════════════════════════════════════
+   NAV SCROLL EFFECT
+   ═══════════════════════════════════════════ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-/* ═══════ 3D TILT ON MOUSE MOVE ═══════ */
-let tiltRAF = null;
-bookScaler.addEventListener('mousemove', (e) => {
-  if (tiltRAF) cancelAnimationFrame(tiltRAF);
-  tiltRAF = requestAnimationFrame(() => {
-    const currentScale = getComputedStyle(document.documentElement)
-      .getPropertyValue('--scale').trim() || 1;
-    const rect = bookScaler.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    bookScaler.style.transform = `scale(${currentScale}) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`;
+/* ═══════════════════════════════════════════
+   HERO TYPEWRITER
+   ═══════════════════════════════════════════ */
+const subtitle = document.getElementById('hero-subtitle');
+const phrases = [
+  'Founder & Lead AI Architect',
+  'Builder of Nuvuja, Maureonix & Gateway',
+  '100+ Projects. 1M+ Requests/Min.',
+  'Nothing is impossible.'
+];
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeDelay = 80;
+
+function typeWriter() {
+  const current = phrases[phraseIndex];
+  if (isDeleting) {
+    subtitle.textContent = current.substring(0, charIndex - 1);
+    charIndex--;
+    typeDelay = 40;
+  } else {
+    subtitle.textContent = current.substring(0, charIndex + 1);
+    charIndex++;
+    typeDelay = 80;
+  }
+
+  if (!isDeleting && charIndex === current.length) {
+    isDeleting = true;
+    typeDelay = 2000;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    typeDelay = 500;
+  }
+
+  setTimeout(typeWriter, typeDelay);
+}
+setTimeout(typeWriter, 1000);
+
+/* ═══════════════════════════════════════════
+   BENTO CARD SPOTLIGHT
+   ═══════════════════════════════════════════ */
+document.querySelectorAll('.bento-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
   });
 });
 
-bookScaler.addEventListener('mouseleave', () => {
-  const currentScale = getComputedStyle(document.documentElement)
-    .getPropertyValue('--scale').trim() || 1;
-  bookScaler.style.transform = `scale(${currentScale}) rotateY(0deg) rotateX(0deg)`;
-});
-
-/* ═══════ SKILL TAG ANIMATION ═══════ */
-function animateSkills() {
-  document.querySelectorAll('.skill-tag').forEach((tag, i) => {
-    tag.classList.remove('show');
-    setTimeout(() => tag.classList.add('show'), i * 60);
-  });
-}
-// Initial animate
-setTimeout(animateSkills, 500);
-
-/* ═══════ LIGHTBOX ═══════ */
-const lightbox = document.getElementById('lightbox');
-const lbimg = document.getElementById('lbimg');
-
-function openLightbox(src) {
-  lbimg.src = src;
-  lightbox.classList.add('active');
-}
-
-function closeLightbox() {
-  lightbox.classList.remove('active');
-}
-
-lightbox.addEventListener('click', closeLightbox);
-
-/* ═══════ API KEY MODAL ═══════ */
+/* ═══════════════════════════════════════════
+   API MODAL
+   ═══════════════════════════════════════════ */
 const apiModal = document.getElementById('api-modal');
 const apiUseCase = document.getElementById('api-usecase');
 
@@ -288,49 +212,45 @@ function requestApiKey() {
   closeApiModal();
 }
 
-/* ═══════ WELCOME POPUP ═══════ */
-const welcomePopup = document.getElementById('welcome-popup');
-const welcomeType = document.getElementById('welcome-type');
+apiModal.addEventListener('click', (e) => {
+  if (e.target === apiModal) closeApiModal();
+});
 
-function typeWriter(text, el, speed = 55) {
-  el.textContent = '';
-  let i = 0;
-  function type() {
-    if (i < text.length) {
-      el.textContent += text.charAt(i);
-      i++;
-      setTimeout(type, speed);
-    }
-  }
-  type();
+/* ═══════════════════════════════════════════
+   CONTACT FORM → WHATSAPP
+   ═══════════════════════════════════════════ */
+function sendMessage() {
+  const name = document.getElementById('form-name').value.trim();
+  const email = document.getElementById('form-email').value.trim();
+  const message = document.getElementById('form-message').value.trim();
+
+  let text = 'Hello Aevibron,';
+  if (name) text += ` My name is ${name}.`;
+  if (email) text += ` Email: ${email}.`;
+  if (message) text += ` ${message}`;
+  if (!name && !email && !message) text += ' I would like to discuss a project with you.';
+
+  window.open('https://wa.me/254116903500?text=' + encodeURIComponent(text), '_blank');
 }
 
-function dismissWelcome() {
-  welcomePopup.classList.remove('active');
-  localStorage.setItem('aevibron-welcome-seen', '1');
-}
+/* ═══════════════════════════════════════════
+   MOBILE NAV TOGGLE
+   ═══════════════════════════════════════════ */
+const navToggle = document.getElementById('nav-toggle');
+const navLinks = document.querySelector('.nav-links');
 
-if (welcomePopup && welcomeType) {
-  if (!localStorage.getItem('aevibron-welcome-seen')) {
-    setTimeout(() => {
-      welcomePopup.classList.add('active');
-      typeWriter('Nothing is impossible. Welcome to my world.', welcomeType, 55);
-    }, 600);
-  }
-}
-
-/* ═══════ HOLOGRAPHIC CARD BORDERS ═══════ */
-function addHoloShine() {
-  document.querySelectorAll('.service-card, .project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(212,175,55,.08), rgba(255,255,255,.03))`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.background = 'rgba(255,255,255,.03)';
-    });
+if (navToggle) {
+  navToggle.addEventListener('click', () => {
+    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '100%';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.background = 'rgba(2,2,5,0.95)';
+    navLinks.style.backdropFilter = 'blur(20px)';
+    navLinks.style.padding = '20px 40px';
+    navLinks.style.borderBottom = '1px solid var(--border)';
+    navLinks.style.gap = '16px';
   });
 }
-addHoloShine();
