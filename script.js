@@ -1,6 +1,5 @@
 const book = document.getElementById('book');
 const sheets = document.querySelectorAll('.sheet');
-const indicator = document.getElementById('page-indicator');
 let currentSheet = 0;
 const totalSheets = 8;
 let isFlipping = false;
@@ -79,10 +78,6 @@ function updateZ() {
   });
 }
 
-function updateIndicator() {
-  indicator.textContent = 'Sheet ' + (currentSheet + 1) + ' of ' + totalSheets;
-}
-
 /* ═══════ FLIP FUNCTIONS ═══════ */
 function flipNext() {
   if (currentSheet >= totalSheets || isFlipping) return;
@@ -99,8 +94,7 @@ function flipNext() {
   setTimeout(() => {
     updateZ();
     updateDots();
-    updateIndicator();
-    animateSkillBars();
+    animateSkills();
     isFlipping = false;
   }, 1000);
 }
@@ -120,8 +114,7 @@ function flipPrev() {
   setTimeout(() => {
     updateZ();
     updateDots();
-    updateIndicator();
-    animateSkillBars();
+    animateSkills();
     isFlipping = false;
   }, 1000);
 }
@@ -160,7 +153,6 @@ function updateDots() {
 
 // Initialize
 updateZ();
-updateIndicator();
 
 /* ═══════ KEYBOARD ═══════ */
 document.addEventListener('keydown', (e) => {
@@ -179,7 +171,7 @@ document.addEventListener('touchend', (e) => {
 /* ═══════ CLICK TO FLIP ═══════ */
 const bookScaler = document.getElementById('book-scaler');
 bookScaler.addEventListener('click', (e) => {
-  if (e.target.closest('.corner') || e.target.closest('a') || e.target.closest('button') || e.target.closest('.screenshot-wrap')) return;
+  if (e.target.closest('.corner') || e.target.closest('a') || e.target.closest('button') || e.target.closest('.screenshot-wrap') || e.target.closest('.project-card') || e.target.closest('.service-card') || e.target.closest('.nav-dot')) return;
   const rect = bookScaler.getBoundingClientRect();
   const x = e.clientX - rect.left;
   if (x > rect.width * 0.55) flipNext();
@@ -209,7 +201,7 @@ if (cursor && spotlight) {
   }
   animateCursor();
 
-  document.querySelectorAll('a, button, .corner, .nav-dot, .screenshot-wrap, .project-card, .service-card').forEach(el => {
+  document.querySelectorAll('a, button, .corner, .nav-dot, .screenshot-wrap, .project-card, .service-card, .skill-tag').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
@@ -247,14 +239,15 @@ bookScaler.addEventListener('mouseleave', () => {
   bookScaler.style.transform = 'scale(var(--scale)) rotateY(0deg) rotateX(0deg)';
 });
 
-/* ═══════ SKILL BAR ANIMATION ═══════ */
-function animateSkillBars() {
-  document.querySelectorAll('.skill-fill').forEach(bar => {
-    bar.classList.remove('animate');
-    void bar.offsetWidth;
-    bar.classList.add('animate');
+/* ═══════ SKILL TAG ANIMATION ═══════ */
+function animateSkills() {
+  document.querySelectorAll('.skill-tag').forEach((tag, i) => {
+    tag.classList.remove('show');
+    setTimeout(() => tag.classList.add('show'), i * 60);
   });
 }
+// Initial animate
+setTimeout(animateSkills, 500);
 
 /* ═══════ LIGHTBOX ═══════ */
 const lightbox = document.getElementById('lightbox');
@@ -295,7 +288,7 @@ function requestApiKey() {
 const welcomePopup = document.getElementById('welcome-popup');
 const welcomeType = document.getElementById('welcome-type');
 
-function typeWriter(text, el, speed = 60) {
+function typeWriter(text, el, speed = 55) {
   el.textContent = '';
   let i = 0;
   function type() {
@@ -318,7 +311,7 @@ if (welcomePopup && welcomeType) {
     setTimeout(() => {
       welcomePopup.classList.add('active');
       typeWriter('Nothing is impossible. Welcome to my world.', welcomeType, 55);
-    }, 800);
+    }, 600);
   }
 }
 

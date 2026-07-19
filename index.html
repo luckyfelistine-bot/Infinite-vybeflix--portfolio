@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Aevibron — Portfolio Book</title>
+<title>Infinite Vybeflix — Portfolio Book</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
@@ -30,7 +30,7 @@
 
 <!-- ═══════ API KEY MODAL ═══════ -->
 <div class="modal-overlay" id="api-modal">
-  <div class="modal-box" style="position:relative;">
+  <div class="modal-box">
     <div class="modal-close" onclick="closeApiModal()"><i class="fas fa-times"></i></div>
     <div class="modal-title">Request API Access</div>
     <div class="modal-text">Due to security considerations (1M requests/minute capacity), API keys are provided on a case-by-case basis.</div>
@@ -45,8 +45,15 @@
 <div class="welcome-popup" id="welcome-popup">
   <div class="welcome-box">
     <img src="images/Aevibron-logo.jpg" alt="Aevibron">
-    <h2>Aevibron</h2>
+    <h2>Infinite Vybeflix</h2>
+    <div class="welcome-brand">Portfolio Book — 2026</div>
     <div class="welcome-type" id="welcome-type"></div>
+    <div class="welcome-nav-hint">
+      <div><i class="fas fa-hand-pointer"></i> Click right side to go forward, left to go back</div>
+      <div><i class="fas fa-keyboard"></i> Use Arrow keys, Space, or Backspace</div>
+      <div><i class="fas fa-mobile-alt"></i> Swipe on mobile devices</div>
+      <div><i class="fas fa-caret-square-down"></i> Or click the corner folds</div>
+    </div>
     <button class="welcome-btn" onclick="dismissWelcome()">Enter Portfolio</button>
   </div>
 </div>
@@ -68,10 +75,10 @@
           <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
           <div class="page-content">
             <img src="images/Aevibron-logo.jpg" alt="Aevibron" class="cover-logo">
-            <div class="cover-name">AEVIBRON</div>
-            <div class="cover-tagline" id="cover-tagline">Nothing is impossible.</div>
+            <div class="cover-brand">INFINITE<br>VYBEFLIX</div>
+            <div class="cover-founder">By Aevibron</div>
             <div class="page-divider"></div>
-            <div class="cover-pronounce">ay · VY · bron</div>
+            <div class="cover-tagline" id="cover-tagline">Nothing is impossible.</div>
             <div class="cover-label">Portfolio 2026</div>
           </div>
           <div class="corner corner-next" onclick="flipNext()"></div>
@@ -130,19 +137,19 @@
                 <div class="timeline-role">Founder & Lead AI Architect</div>
                 <div class="timeline-company">Aevibron</div>
                 <div class="timeline-date">2022 — PRESENT</div>
-                <div class="timeline-desc">Building AI infrastructure handling 1M+ requests per minute. Architected 5+ production AI products from scratch.</div>
+                <div class="timeline-desc">Building AI infrastructure handling 1M+ requests per minute. Architected 5+ production AI products.</div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-role">AI Systems Engineer</div>
                 <div class="timeline-company">Freelance</div>
                 <div class="timeline-date">2021 — 2022</div>
-                <div class="timeline-desc">Delivered custom AI solutions for clients worldwide. Built intelligent chatbots and automation pipelines.</div>
+                <div class="timeline-desc">Delivered custom AI solutions worldwide. Built intelligent chatbots and automation pipelines.</div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-role">Full-Stack Developer</div>
                 <div class="timeline-company">Self-Directed</div>
                 <div class="timeline-date">2020 — 2021</div>
-                <div class="timeline-desc">Mastered modern web and AI stack through 100+ hands-on projects. Zero formal training, 100% passion-driven.</div>
+                <div class="timeline-desc">Mastered the modern stack through 100+ hands-on projects. Zero formal training, 100% passion-driven.</div>
               </div>
             </div>
           </div>
@@ -159,7 +166,7 @@
             <div class="page-title" style="color:rgba(168,85,247,.85)">Education</div>
             <div class="page-divider" style="background:linear-gradient(90deg,transparent,rgba(168,85,247,.3),transparent)"></div>
             <div class="page-subtitle">Self-Directed & Project-Based</div>
-            <div class="page-text" style="margin-bottom:20px;">No traditional degree. Every skill was forged in the fire of real projects. I learn by building, break things to understand them, and rebuild them better.</div>
+            <div class="page-text" style="margin-bottom:16px;">No traditional degree. Every skill was forged in the fire of real projects. I learn by building, break things to understand them, and rebuild them better.</div>
             <div class="feature-list">
               <li><i class="fas fa-check"></i> AI / Machine Learning Integration</li>
               <li><i class="fas fa-check"></i> API Architecture & Gateway Design</li>
@@ -187,7 +194,7 @@
             <div class="page-title">Services</div>
             <div class="page-divider"></div>
             <div class="page-subtitle">What I Can Build For You</div>
-            <div class="card-grid" style="margin-top:8px;">
+            <div class="card-grid" style="margin-top:6px;">
               <div class="service-card">
                 <i class="fas fa-globe"></i>
                 <h4>Web Development</h4>
@@ -213,7 +220,7 @@
           <div class="corner corner-next" onclick="flipNext()"></div>
           <span class="pg-num r">05</span>
         </div>
-        <!-- PAGE 6 — SKILLS -->
+        <!-- PAGE 6 — SKILLS (Animated Tags) -->
         <div class="face back">
           <div class="page-frame"></div>
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
@@ -221,39 +228,30 @@
           <div class="page-content">
             <div class="page-title">Skills</div>
             <div class="page-divider"></div>
-            <div class="skill-list">
-              <div class="skill-item">
-                <div class="skill-name"><span>JavaScript / TypeScript</span><span>95%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:95%"></div></div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-name"><span>Python</span><span>90%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:90%"></div></div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-name"><span>React / Next.js</span><span>88%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:88%"></div></div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-name"><span>Node.js</span><span>92%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:92%"></div></div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-name"><span>AI / ML Integration</span><span>85%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:85%"></div></div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-name"><span>API Design</span><span>90%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:90%"></div></div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-name"><span>System Architecture</span><span>82%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:82%"></div></div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-name"><span>WhatsApp Bot Dev</span><span>88%</span></div>
-                <div class="skill-bar"><div class="skill-fill" style="--target:88%"></div></div>
-              </div>
+            <div class="skill-cat">Languages</div>
+            <div class="skill-cloud" id="skill-cloud-1">
+              <div class="skill-tag"><i class="fab fa-js"></i>JavaScript</div>
+              <div class="skill-tag"><i class="fab fa-js"></i>TypeScript</div>
+              <div class="skill-tag"><i class="fab fa-python"></i>Python</div>
+              <div class="skill-tag"><i class="fas fa-code"></i>Node.js</div>
+              <div class="skill-tag"><i class="fas fa-terminal"></i>Bash</div>
+            </div>
+            <div class="skill-cat">Frameworks</div>
+            <div class="skill-cloud" id="skill-cloud-2">
+              <div class="skill-tag"><i class="fab fa-react"></i>React</div>
+              <div class="skill-tag"><i class="fas fa-n"></i>Next.js</div>
+              <div class="skill-tag"><i class="fas fa-bolt"></i>Express</div>
+              <div class="skill-tag"><i class="fas fa-mobile-alt"></i>React Native</div>
+              <div class="skill-tag"><i class="fas fa-wind"></i>Tailwind</div>
+            </div>
+            <div class="skill-cat">AI & Tools</div>
+            <div class="skill-cloud" id="skill-cloud-3">
+              <div class="skill-tag"><i class="fas fa-brain"></i>OpenAI</div>
+              <div class="skill-tag"><i class="fas fa-robot"></i>Groq</div>
+              <div class="skill-tag"><i class="fas fa-project-diagram"></i>LangChain</div>
+              <div class="skill-tag"><i class="fas fa-database"></i>MongoDB</div>
+              <div class="skill-tag"><i class="fab fa-docker"></i>Docker</div>
+              <div class="skill-tag"><i class="fas fa-cloud"></i>Vercel</div>
             </div>
           </div>
           <div class="corner corner-prev" onclick="flipPrev()"></div>
@@ -262,7 +260,7 @@
       </div>
 
       <!-- ════════════════════════════════════════════════════════════
-           SHEET 3: NUVUJA FEATURE | PROJECTS LIST
+           SHEET 3: NUVUJA | MAUREONIX
            ════════════════════════════════════════════════════════════ -->
       <div class="sheet" data-index="3">
         <!-- PAGE 7 — NUVUJA FEATURE -->
@@ -271,69 +269,48 @@
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
           <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
           <div class="page-content">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-              <div class="page-title" style="margin-bottom:0;font-size:24px;">Nuvuja</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <div class="page-title" style="margin-bottom:0;font-size:22px;">Nuvuja</div>
               <span class="badge badge-live">Live</span>
             </div>
-            <div class="page-subtitle" style="margin-bottom:12px;">AI IDE — Code with Intelligence</div>
+            <div class="page-subtitle" style="margin-bottom:10px;">AI Cloud Editor</div>
             <div class="screenshot-wrap" onclick="openLightbox('images/Nuvuja-advert.png')">
               <img src="images/Nuvuja-advert.png" alt="Nuvuja AI IDE">
             </div>
+            <div class="page-text" style="text-align:left;margin-bottom:10px;font-size:11px;">A next-generation cloud development environment that makes software creation faster, smarter, and more accessible. AI assistance built directly into the workflow.</div>
             <div class="feature-list">
               <li><i class="fas fa-bolt"></i> AI-powered code generation</li>
               <li><i class="fas fa-magic"></i> Intelligent autocomplete</li>
               <li><i class="fas fa-users"></i> Real-time collaboration</li>
               <li><i class="fas fa-code"></i> Multi-language support</li>
             </div>
-            <a href="https://nuvuja.vercel.app" target="_blank" class="cta-btn" style="margin-top:14px;">
+            <a href="https://nuvuja.vercel.app" target="_blank" class="cta-btn" style="margin-top:10px;">
               <i class="fas fa-external-link-alt"></i> Visit Nuvuja
             </a>
           </div>
           <div class="corner corner-next" onclick="flipNext()"></div>
           <span class="pg-num r">07</span>
         </div>
-        <!-- PAGE 8 — PROJECTS LIST -->
+        <!-- PAGE 8 — MAUREONIX FEATURE -->
         <div class="face back">
           <div class="page-frame"></div>
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
           <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
           <div class="page-content">
-            <div class="page-title">All Projects</div>
-            <div class="page-divider"></div>
-            <div class="project-card">
-              <img src="images/Nuvuja-logo.png" alt="Nuvuja">
-              <div class="proj-info">
-                <div class="proj-name">Nuvuja <span class="badge badge-live" style="margin-left:6px;">Live</span></div>
-                <div class="proj-desc">AI IDE for intelligent coding</div>
-              </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <div class="page-title" style="margin-bottom:0;font-size:20px;">Maureonix</div>
+              <span class="badge badge-live">Live</span>
             </div>
-            <div class="project-card">
-              <img src="images/Aevibron-gateway.png" alt="Gateway">
-              <div class="proj-info">
-                <div class="proj-name">Aevibron Gateway <span class="badge badge-live" style="margin-left:6px;">Live</span></div>
-                <div class="proj-desc">Unlimited AI API access</div>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="images/Iris-logo.png" alt="IRIS">
-              <div class="proj-info">
-                <div class="proj-name">IRIS <span class="badge badge-dev" style="margin-left:6px;">In Dev</span></div>
-                <div class="proj-desc">Autonomous AI Engineer</div>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="images/Kaelum-logo.png" alt="Kaelum">
-              <div class="proj-info">
-                <div class="proj-name">Kaelum <span class="badge badge-personal" style="margin-left:6px;">Personal</span></div>
-                <div class="proj-desc">Termux-native AI assistant</div>
-              </div>
-            </div>
-            <div class="project-card">
+            <div class="page-subtitle" style="margin-bottom:10px;">Infinite WhatsApp Intelligence</div>
+            <div class="screenshot-wrap" onclick="openLightbox('images/Maureonix-advert.png')">
               <img src="images/Maureonix-advert.png" alt="Maureonix">
-              <div class="proj-info">
-                <div class="proj-name">Maureonix <span class="badge badge-live" style="margin-left:6px;">Live</span></div>
-                <div class="proj-desc">WhatsApp AI Bot — 700+ commands</div>
-              </div>
+            </div>
+            <div class="page-text" style="text-align:left;margin-bottom:10px;font-size:11px;">An intelligent WhatsApp assistant with 700+ commands. Represented by the brown fox — a symbol of intelligence, adaptability, and limitless capability.</div>
+            <div class="feature-list">
+              <li><i class="fas fa-brain"></i> AI assistance & automation</li>
+              <li><i class="fas fa-gamepad"></i> Entertainment & utilities</li>
+              <li><i class="fas fa-users-cog"></i> Group management</li>
+              <li><i class="fas fa-search"></i> Information retrieval</li>
             </div>
           </div>
           <div class="corner corner-prev" onclick="flipPrev()"></div>
@@ -342,7 +319,7 @@
       </div>
 
       <!-- ════════════════════════════════════════════════════════════
-           SHEET 4: GATEWAY FEATURE | OPEN TO WORK
+           SHEET 4: GATEWAY | ALL PROJECTS
            ════════════════════════════════════════════════════════════ -->
       <div class="sheet" data-index="4">
         <!-- PAGE 9 — GATEWAY FEATURE -->
@@ -351,21 +328,22 @@
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
           <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
           <div class="page-content">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-              <div class="page-title" style="margin-bottom:0;font-size:22px;">Aevibron Gateway</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <div class="page-title" style="margin-bottom:0;font-size:18px;">Aevibron Gateway</div>
               <span class="badge badge-live">Live</span>
             </div>
-            <div class="page-subtitle" style="margin-bottom:12px;">Unlimited AI API Access</div>
+            <div class="page-subtitle" style="margin-bottom:10px;">The Sovereign AI Layer</div>
             <div class="screenshot-wrap" onclick="openLightbox('images/Aevibron-gateway.png')">
               <img src="images/Aevibron-gateway.png" alt="Aevibron Gateway">
             </div>
+            <div class="page-text" style="text-align:left;margin-bottom:10px;font-size:11px;">The unified intelligence layer connecting applications to multiple AI models through one secure API. Build once, access a growing ecosystem of AI capabilities.</div>
             <div class="feature-list">
-              <li><i class="fas fa-balance-scale"></i> Intelligent load balancing</li>
+              <li><i class="fas fa-route"></i> Intelligent request routing</li>
               <li><i class="fas fa-key"></i> Secure key management</li>
-              <li><i class="fas fa-chart-line"></i> Real-time usage analytics</li>
+              <li><i class="fas fa-chart-line"></i> Real-time analytics</li>
               <li><i class="fas fa-shield-alt"></i> Advanced rate limiting</li>
             </div>
-            <div style="display:flex;gap:10px;margin-top:12px;">
+            <div style="display:flex;gap:8px;margin-top:10px;">
               <a href="https://aevibron-gateway.vercel.app" target="_blank" class="cta-btn" style="margin-top:0;">
                 <i class="fas fa-external-link-alt"></i> Visit
               </a>
@@ -377,7 +355,86 @@
           <div class="corner corner-next" onclick="flipNext()"></div>
           <span class="pg-num r">09</span>
         </div>
-        <!-- PAGE 10 — OPEN TO WORK -->
+        <!-- PAGE 10 — ALL PROJECTS OVERVIEW -->
+        <div class="face back">
+          <div class="page-frame"></div>
+          <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
+          <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
+          <div class="page-content">
+            <div class="page-title">All Projects</div>
+            <div class="page-divider"></div>
+            <div class="project-card">
+              <img src="images/Nuvuja-logo.png" alt="Nuvuja">
+              <div class="proj-info">
+                <div class="proj-name">Nuvuja <span class="badge badge-live">Live</span></div>
+                <div class="proj-desc">AI Cloud Editor — code with intelligence</div>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="images/Aevibron-gateway.png" alt="Gateway">
+              <div class="proj-info">
+                <div class="proj-name">Aevibron Gateway <span class="badge badge-live">Live</span></div>
+                <div class="proj-desc">The Sovereign AI Layer — unlimited API access</div>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="images/Maureonix-advert.png" alt="Maureonix">
+              <div class="proj-info">
+                <div class="proj-name">Maureonix <span class="badge badge-live">Live</span></div>
+                <div class="proj-desc">WhatsApp AI Bot — 700+ commands</div>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="images/Iris-logo.png" alt="IRIS">
+              <div class="proj-info">
+                <div class="proj-name">IRIS <span class="badge badge-dev">In Dev</span></div>
+                <div class="proj-desc">Autonomous AI Engineer</div>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="images/Kaelum-logo.png" alt="Kaelum">
+              <div class="proj-info">
+                <div class="proj-name">Kaelum <span class="badge badge-personal">Personal</span></div>
+                <div class="proj-desc">Termux-native AI assistant</div>
+              </div>
+            </div>
+          </div>
+          <div class="corner corner-prev" onclick="flipPrev()"></div>
+          <span class="pg-num l">10</span>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════
+           SHEET 5: IRIS & KAELUM | OPEN TO WORK
+           ════════════════════════════════════════════════════════════ -->
+      <div class="sheet" data-index="5">
+        <!-- PAGE 11 — IRIS & KAELUM -->
+        <div class="face front">
+          <div class="page-frame"></div>
+          <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
+          <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
+          <div class="page-content">
+            <div class="page-title">More Projects</div>
+            <div class="page-divider"></div>
+            <div class="project-card" style="padding:14px;">
+              <img src="images/Iris-logo.png" alt="IRIS" style="width:50px;height:50px;">
+              <div class="proj-info">
+                <div class="proj-name">IRIS <span class="badge badge-dev">In Development</span></div>
+                <div class="proj-desc" style="font-size:11px;">An autonomous AI Engineer that writes, debugs, and improves code on its own. Self-improving code generation with persistent memory and real-time awareness.</div>
+              </div>
+            </div>
+            <div class="project-card" style="padding:14px;">
+              <img src="images/Kaelum-logo.png" alt="Kaelum" style="width:50px;height:50px;">
+              <div class="proj-info">
+                <div class="proj-name">Kaelum <span class="badge badge-personal">Personal</span></div>
+                <div class="proj-desc" style="font-size:11px;">A Termux-native AI assistant built for mobile developers. Brings powerful AI capabilities directly to your Android terminal without cloud dependency.</div>
+              </div>
+            </div>
+          </div>
+          <div class="corner corner-next" onclick="flipNext()"></div>
+          <span class="pg-num r">11</span>
+        </div>
+        <!-- PAGE 12 — OPEN TO WORK -->
         <div class="face back">
           <div class="page-frame"></div>
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
@@ -401,94 +458,11 @@
                 <span class="lbl">Req/Min</span>
               </div>
             </div>
-            <div class="page-text" style="margin-bottom:16px;">Available for freelance, contract, and full-time opportunities. I bring passion, determination, and a track record of shipping production-grade AI systems.</div>
-            <div class="page-text" style="color:var(--cyan);font-weight:500;"><i class="fas fa-globe" style="margin-right:6px;"></i>We work online anywhere anytime</div>
+            <div class="page-text" style="margin-bottom:12px;">Available for freelance, contract, and full-time opportunities. I bring passion, determination, and a track record of shipping production-grade AI systems.</div>
+            <div class="page-text" style="color:var(--cyan);font-weight:500;font-size:12px;"><i class="fas fa-globe" style="margin-right:6px;"></i>We work online anywhere anytime</div>
             <a href="https://wa.me/254116903500" target="_blank" class="cta-btn">
               <i class="fab fa-whatsapp"></i> Let's Talk
             </a>
-          </div>
-          <div class="corner corner-prev" onclick="flipPrev()"></div>
-          <span class="pg-num l">10</span>
-        </div>
-      </div>
-
-      <!-- ════════════════════════════════════════════════════════════
-           SHEET 5: CV SUMMARY | PROFESSIONAL EXPERIENCE
-           ════════════════════════════════════════════════════════════ -->
-      <div class="sheet" data-index="5">
-        <!-- PAGE 11 — CV SUMMARY -->
-        <div class="face front">
-          <div class="page-frame"></div>
-          <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
-          <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
-          <div class="page-content">
-            <div class="page-title">CV Summary</div>
-            <div class="page-divider"></div>
-            <div class="page-text" style="margin-bottom:20px;text-align:left;">
-              Founder and Lead AI Architect with 3+ years of hands-on experience building production-grade AI systems. Self-taught engineer who has shipped 100+ projects spanning web applications, API gateways, AI bots, and autonomous systems. Proven ability to architect scalable infrastructure handling millions of requests per minute.
-            </div>
-            <div class="card-grid single" style="gap:8px;">
-              <div class="service-card" style="text-align:left;display:flex;align-items:center;gap:12px;padding:12px;">
-                <i class="fas fa-brain" style="margin-bottom:0;font-size:18px;"></i>
-                <div>
-                  <h4 style="margin-bottom:2px;">AI Architecture</h4>
-                  <p>Designing intelligent systems that scale</p>
-                </div>
-              </div>
-              <div class="service-card" style="text-align:left;display:flex;align-items:center;gap:12px;padding:12px;">
-                <i class="fas fa-network-wired" style="margin-bottom:0;font-size:18px;"></i>
-                <div>
-                  <h4 style="margin-bottom:2px;">API Development</h4>
-                  <p>Building robust, high-throughput gateways</p>
-                </div>
-              </div>
-              <div class="service-card" style="text-align:left;display:flex;align-items:center;gap:12px;padding:12px;">
-                <i class="fas fa-layer-group" style="margin-bottom:0;font-size:18px;"></i>
-                <div>
-                  <h4 style="margin-bottom:2px;">Full-Stack Engineering</h4>
-                  <p>End-to-end product development</p>
-                </div>
-              </div>
-              <div class="service-card" style="text-align:left;display:flex;align-items:center;gap:12px;padding:12px;">
-                <i class="fas fa-robot" style="margin-bottom:0;font-size:18px;"></i>
-                <div>
-                  <h4 style="margin-bottom:2px;">Bot Development</h4>
-                  <p>WhatsApp bots with 700+ commands</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="corner corner-next" onclick="flipNext()"></div>
-          <span class="pg-num r">11</span>
-        </div>
-        <!-- PAGE 12 — PROFESSIONAL EXPERIENCE -->
-        <div class="face back">
-          <div class="page-frame"></div>
-          <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
-          <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
-          <div class="page-content">
-            <div class="page-title">Experience</div>
-            <div class="page-divider"></div>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-role">Founder & Lead AI Architect</div>
-                <div class="timeline-company">Aevibron</div>
-                <div class="timeline-date">2022 — PRESENT</div>
-                <div class="timeline-desc">Built AI gateway infrastructure handling 1M+ requests per minute. Developed and launched 5+ production AI products including Nuvuja IDE, Aevibron Gateway, and Maureonix WhatsApp Bot. Architected scalable multi-provider AI routing system with load balancing, key management, and real-time analytics.</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-role">AI Systems Engineer</div>
-                <div class="timeline-company">Freelance</div>
-                <div class="timeline-date">2021 — 2022</div>
-                <div class="timeline-desc">Delivered custom AI-powered solutions for clients across industries. Built intelligent chatbots, automation pipelines, and data processing systems. Specialized in natural language processing and conversational AI.</div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-role">Full-Stack Developer</div>
-                <div class="timeline-company">Self-Directed</div>
-                <div class="timeline-date">2020 — 2021</div>
-                <div class="timeline-desc">Completed 100+ projects to master the modern development stack. Built web apps, APIs, mobile interfaces, and automation tools. Developed deep expertise in JavaScript, Python, React, Node.js, and cloud infrastructure through relentless hands-on practice.</div>
-              </div>
-            </div>
           </div>
           <div class="corner corner-prev" onclick="flipPrev()"></div>
           <span class="pg-num l">12</span>
@@ -496,58 +470,11 @@
       </div>
 
       <!-- ════════════════════════════════════════════════════════════
-           SHEET 6: KEY PROJECTS | CONTACT ME
+           SHEET 6: CONTACT | THANK YOU
            ════════════════════════════════════════════════════════════ -->
       <div class="sheet" data-index="6">
-        <!-- PAGE 13 — KEY PROJECTS -->
+        <!-- PAGE 13 — CONTACT -->
         <div class="face front">
-          <div class="page-frame"></div>
-          <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
-          <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
-          <div class="page-content">
-            <div class="page-title">Key Projects</div>
-            <div class="page-divider"></div>
-            <div class="project-card">
-              <img src="images/Nuvuja-logo.png" alt="Nuvuja">
-              <div class="proj-info">
-                <div class="proj-name">Nuvuja <span class="badge badge-live" style="margin-left:6px;">Live</span></div>
-                <div class="proj-desc">AI-powered IDE. Intelligent code generation and autocomplete.</div>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="images/Aevibron-gateway.png" alt="Gateway">
-              <div class="proj-info">
-                <div class="proj-name">Aevibron Gateway <span class="badge badge-live" style="margin-left:6px;">Live</span></div>
-                <div class="proj-desc">Unlimited AI API with load balancing and analytics.</div>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="images/Iris-logo.png" alt="IRIS">
-              <div class="proj-info">
-                <div class="proj-name">IRIS <span class="badge badge-dev" style="margin-left:6px;">In Development</span></div>
-                <div class="proj-desc">Autonomous AI Engineer. Self-improving code generation.</div>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="images/Kaelum-logo.png" alt="Kaelum">
-              <div class="proj-info">
-                <div class="proj-name">Kaelum <span class="badge badge-personal" style="margin-left:6px;">Personal</span></div>
-                <div class="proj-desc">Termux-native AI assistant for mobile developers.</div>
-              </div>
-            </div>
-            <div class="project-card">
-              <img src="images/Maureonix-advert.png" alt="Maureonix">
-              <div class="proj-info">
-                <div class="proj-name">Maureonix <span class="badge badge-live" style="margin-left:6px;">Live</span></div>
-                <div class="proj-desc">WhatsApp AI Bot with 700+ commands and growing.</div>
-              </div>
-            </div>
-          </div>
-          <div class="corner corner-next" onclick="flipNext()"></div>
-          <span class="pg-num r">13</span>
-        </div>
-        <!-- PAGE 14 — CONTACT ME -->
-        <div class="face back">
           <div class="page-frame"></div>
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
           <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
@@ -592,7 +519,30 @@
                 </div>
               </div>
             </div>
-            <div class="page-text" style="margin-top:16px;font-style:italic;">"Let's create something impossible together."</div>
+            <div class="page-text" style="margin-top:14px;font-style:italic;font-size:11px;">"Let's create something impossible together."</div>
+          </div>
+          <div class="corner corner-next" onclick="flipNext()"></div>
+          <span class="pg-num r">13</span>
+        </div>
+        <!-- PAGE 14 — THANK YOU -->
+        <div class="face back">
+          <div class="page-frame"></div>
+          <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
+          <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
+          <div class="page-content">
+            <img src="images/Aevibron-logo.jpg" alt="Aevibron" class="cover-logo" style="width:100px;height:100px;">
+            <div class="page-title" style="font-size:24px;">Thank You</div>
+            <div class="page-divider"></div>
+            <div class="page-text" style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(255,255,255,.45);margin-bottom:16px;">
+              "Nothing is impossible. The word itself says 'I'm possible'."
+            </div>
+            <div class="page-text" style="margin-bottom:14px;">Built with passion and determination by Aevibron. Every line of code, every pixel, every idea — fueled by the belief that limits exist only to be broken.</div>
+            <div class="page-text" style="color:var(--rose);font-size:11px;"><i class="fas fa-heart" style="margin-right:6px;"></i>Thank you for your time and support.</div>
+            <div class="social-links" style="margin-top:14px;">
+              <a href="mailto:aevibron@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+              <a href="https://wa.me/254116903500" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" title="Channel"><i class="fas fa-broadcast-tower"></i></a>
+            </div>
           </div>
           <div class="corner corner-prev" onclick="flipPrev()"></div>
           <span class="pg-num l">14</span>
@@ -600,49 +550,42 @@
       </div>
 
       <!-- ════════════════════════════════════════════════════════════
-           SHEET 7: THANK YOU | BACK COVER
+           SHEET 7: BACK COVER
            ════════════════════════════════════════════════════════════ -->
       <div class="sheet" data-index="7">
-        <!-- PAGE 15 — THANK YOU -->
+        <!-- PAGE 15 — BACK COVER -->
         <div class="face front">
           <div class="page-frame"></div>
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
           <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
           <div class="page-content">
-            <img src="images/Aevibron-logo.jpg" alt="Aevibron" class="cover-logo" style="width:120px;height:120px;">
-            <div class="page-title" style="font-size:26px;">Thank You</div>
+            <img src="images/Aevibron-logo.jpg" alt="Aevibron" class="cover-logo" style="width:90px;height:90px;opacity:.7;">
+            <div class="cover-brand" style="font-size:26px;letter-spacing:4px;">AEVIBRON</div>
             <div class="page-divider"></div>
-            <div class="page-text" style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.45);margin-bottom:20px;">
-              "Nothing is impossible. The word itself says 'I'm possible'."
+            <div class="page-subtitle">Eternal Vibration Particle</div>
+            <div class="cover-founder" style="color:rgba(255,255,255,.25);">ay · VY · bron</div>
+            <div class="page-text" style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(212,175,55,.5);margin:16px 0;">
+              Nothing is impossible.
             </div>
-            <div class="page-text" style="margin-bottom:16px;">Built with passion and determination by Aevibron. Every line of code, every pixel, every idea — fueled by the belief that limits exist only to be broken.</div>
-            <div class="page-text" style="color:var(--rose);"><i class="fas fa-heart" style="margin-right:6px;"></i>Thank you for your time and support.</div>
-            <div class="social-links" style="margin-top:16px;">
-              <a href="mailto:aevibron@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-              <a href="https://wa.me/254116903500" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-              <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" title="Channel"><i class="fas fa-broadcast-tower"></i></a>
+            <div class="page-text" style="font-size:9px;color:rgba(255,255,255,.2);letter-spacing:2px;text-transform:uppercase;margin-top:16px;">
+              Infinite Vybeflix<br>
+              &copy; 2026 Aevibron. All rights reserved.
             </div>
           </div>
           <div class="corner corner-next" onclick="flipNext()"></div>
           <span class="pg-num r">15</span>
         </div>
-        <!-- PAGE 16 — BACK COVER -->
+        <!-- PAGE 16 — INNER BACK (dark) -->
         <div class="face back">
           <div class="page-frame"></div>
           <div class="ornament ornament-tl"></div><div class="ornament ornament-tr"></div>
           <div class="ornament ornament-bl"></div><div class="ornament ornament-br"></div>
           <div class="page-content">
-            <img src="images/Aevibron-logo.jpg" alt="Aevibron" class="cover-logo" style="width:100px;height:100px;opacity:.6;">
-            <div class="cover-name" style="font-size:28px;letter-spacing:5px;">AEVIBRON</div>
-            <div class="page-divider"></div>
-            <div class="page-subtitle">Eternal Vibration Particle</div>
-            <div class="cover-pronounce">ay · VY · bron</div>
-            <div class="page-text" style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(212,175,55,.5);margin:20px 0;">
-              Nothing is impossible.
-            </div>
-            <div class="page-text" style="font-size:10px;color:rgba(255,255,255,.2);letter-spacing:2px;text-transform:uppercase;margin-top:20px;">
-              Infinite Vybeflix<br>
-              &copy; 2026 Aevibron. All rights reserved.
+            <div class="page-icon" style="color:rgba(212,175,55,.3);font-size:60px;">&#10022;</div>
+            <div class="page-title" style="font-size:20px;color:rgba(212,175,55,.4);">The End</div>
+            <div class="page-divider" style="background:linear-gradient(90deg,transparent,rgba(212,175,55,.2),transparent)"></div>
+            <div class="page-text" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(255,255,255,.25);">
+              Close the book, and you will find it opens again.<br>The story never ends — it only transforms.
             </div>
           </div>
           <div class="corner corner-prev" onclick="flipPrev()"></div>
@@ -665,9 +608,6 @@
   <div class="nav-dot" onclick="jumpToSheet(6)"></div>
   <div class="nav-dot" onclick="jumpToSheet(7)"></div>
 </div>
-
-<!-- ═══════ PAGE INDICATOR ═══════ -->
-<div class="page-indicator" id="page-indicator">Sheet 1 of 8</div>
 
 <script src="script.js"></script>
 </body>
