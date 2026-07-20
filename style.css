@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
-   INFINITE VYBEFLIX PORTFOLIO — UPGRADED STYLE
-   3D Effects, Marquee Glow, Holographic Cards
+   INFINITE VYBEFLIX PORTFOLIO — STYLE
+   Professional, Clean, Beautiful
    ═══════════════════════════════════════════ */
 
 :root {
@@ -205,7 +205,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* ═══════════════════════════════════════════
-   NAVIGATION — MAGNETIC LINKS
+   NAVIGATION
    ═══════════════════════════════════════════ */
 .nav {
   position: fixed;
@@ -365,7 +365,7 @@ img { max-width: 100%; height: auto; display: block; }
 .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
 
 /* ═══════════════════════════════════════════
-   HERO — 3D FLOATING ORBS
+   HERO
    ═══════════════════════════════════════════ */
 .hero {
   position: relative;
@@ -740,11 +740,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* ═══════════════════════════════════════════
-   ABOUT
+   ABOUT — FIXED IMAGE SIZING
    ═══════════════════════════════════════════ */
 .about-grid {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 64px;
   align-items: start;
 }
@@ -759,17 +759,21 @@ img { max-width: 100%; height: auto; display: block; }
   background: var(--bg-elevated);
   transition: border-color 0.3s, transform 0.4s ease;
   position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+.about-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.5s ease;
 }
 .about-photo-frame:hover {
   border-color: var(--border-hover);
   transform: translateY(-4px);
   box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.1);
-}
-.about-photo-frame img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.5s ease;
 }
 .about-photo-frame:hover img {
   transform: scale(1.03);
@@ -1245,7 +1249,6 @@ img { max-width: 100%; height: auto; display: block; }
   color: #fff;
 }
 
-/* GLOW VARIANTS */
 .glow-gold { border-color: rgba(212,175,55,0.15); }
 .glow-gold i { color: var(--gold); }
 .glow-gold:hover { border-color: var(--gold); background: rgba(212,175,55,0.08); box-shadow: 0 0 20px rgba(212,175,55,0.2), 0 0 40px rgba(212,175,55,0.1); }
@@ -1281,7 +1284,41 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* ═══════════════════════════════════════════
-   EXPERIENCE — 3D TIMELINE
+   LOTTIE SECTION
+   ═══════════════════════════════════════════ */
+.lottie-section {
+  padding: 60px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.lottie-container {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+}
+.lottie-glow {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+  pointer-events: none;
+  animation: lottiePulse 4s ease-in-out infinite;
+}
+@keyframes lottiePulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+.lottie-caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+/* ═══════════════════════════════════════════
+   EXPERIENCE — FIXED TIMELINE
    ═══════════════════════════════════════════ */
 .timeline {
   max-width: 800px;
@@ -1294,16 +1331,18 @@ img { max-width: 100%; height: auto; display: block; }
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 1px;
+  width: 2px;
   background: linear-gradient(180deg, var(--gold), var(--cyan), var(--purple), transparent);
   transform: translateX(-50%);
   box-shadow: 0 0 10px rgba(212,175,55,0.3), 0 0 20px rgba(0,212,255,0.2);
+  z-index: 1;
 }
 .timeline-item {
   position: relative;
   padding-bottom: 50px;
   display: flex;
   align-items: flex-start;
+  z-index: 2;
 }
 .timeline-item:nth-child(odd) {
   flex-direction: row;
@@ -1318,67 +1357,67 @@ img { max-width: 100%; height: auto; display: block; }
   position: absolute;
   left: 50%;
   top: 6px;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--gold);
-  border: 2px solid var(--bg);
-  box-shadow: 0 0 16px rgba(212,175,55,0.3), 0 0 32px rgba(212,175,55,0.1);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 16px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.2);
   transform: translateX(-50%);
-  z-index: 2;
+  z-index: 3;
   transition: all 0.3s ease;
 }
 .timeline-item:hover .timeline-dot {
-  transform: translateX(-50%) scale(1.25);
-  box-shadow: 0 0 24px rgba(212,175,55,0.4), 0 0 48px rgba(212,175,55,0.2);
+  transform: translateX(-50%) scale(1.3);
+  box-shadow: 0 0 24px rgba(212,175,55,0.5), 0 0 48px rgba(212,175,55,0.3);
 }
 .timeline-card {
-  background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 22px;
+  padding: 24px;
   transition: all 0.3s ease;
   word-wrap: break-word;
   overflow-wrap: break-word;
   min-width: 0;
   width: 100%;
   position: relative;
-  overflow: hidden;
 }
 .timeline-card:hover {
   border-color: var(--border-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.3), 0 0 20px rgba(212,175,55,0.05);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 20px rgba(212,175,55,0.08);
 }
 .timeline-role {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .timeline-company {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--gold);
-  margin-bottom: 6px;
-  font-weight: 500;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 .timeline-date {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-dim);
   letter-spacing: 1.5px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-transform: uppercase;
+  display: block;
 }
 .timeline-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.8;
   word-wrap: break-word;
 }
 
 /* ═══════════════════════════════════════════
-   CONTACT — GLASSMORPHISM + ANIMATED BORDERS
+   CONTACT
    ═══════════════════════════════════════════ */
 .contact-grid {
   display: grid;
@@ -1476,32 +1515,6 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: 2px;
   margin-bottom: 20px;
 }
-
-/* ANIMATED BORDER */
-.animated-border {
-  position: relative;
-}
-.border-glow {
-  position: absolute;
-  inset: -2px;
-  border-radius: 18px;
-  background: conic-gradient(from 0deg, var(--gold), var(--cyan), var(--purple), var(--rose), var(--gold));
-  background-size: 100% 100%;
-  animation: borderRotate 4s linear infinite;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s;
-  filter: blur(4px);
-}
-.animated-border:hover .border-glow,
-.animated-border:focus-within .border-glow {
-  opacity: 0.5;
-}
-@keyframes borderRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 .form-group {
   margin-bottom: 18px;
 }
@@ -1606,7 +1619,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 /* ═══════════════════════════════════════════
-   MODAL — GLASSMORPHISM
+   MODAL
    ═══════════════════════════════════════════ */
 .modal-overlay {
   position: fixed;
@@ -1814,40 +1827,6 @@ img { max-width: 100%; height: auto; display: block; }
 .toast i { font-size: 15px; }
 
 /* ═══════════════════════════════════════════
-   LOTTIE SECTION
-   ═══════════════════════════════════════════ */
-.lottie-section {
-  padding: 60px 24px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.lottie-container {
-  max-width: 500px;
-  margin: 0 auto;
-  position: relative;
-}
-.lottie-glow {
-  position: absolute;
-  inset: -50px;
-  background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
-  pointer-events: none;
-  animation: lottiePulse 4s ease-in-out infinite;
-}
-@keyframes lottiePulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.1); }
-}
-.lottie-caption {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 4px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  margin-top: 20px;
-}
-
-/* ═══════════════════════════════════════════
    3D REVEAL ANIMATIONS
    ═══════════════════════════════════════════ */
 .reveal-3d-up {
@@ -1893,7 +1872,7 @@ img { max-width: 100%; height: auto; display: block; }
    RESPONSIVE
    ═══════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .about-grid { grid-template-columns: 260px 1fr; gap: 40px; }
+  .about-grid { grid-template-columns: 280px 1fr; gap: 40px; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { gap: 28px; }
@@ -1947,7 +1926,7 @@ img { max-width: 100%; height: auto; display: block; }
   }
   .timeline-line { left: 8px; transform: none; }
   .timeline-dot { left: 8px; transform: translateX(-50%); }
-  .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.25); }
+  .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.3); }
 
   .about-social { justify-content: center; }
   .footer-social { flex-wrap: wrap; }

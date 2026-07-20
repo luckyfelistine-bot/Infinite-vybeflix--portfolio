@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -54,9 +55,7 @@
   </button>
 </nav>
 
-<!-- ═══════════════════════════════════════════
-     HERO — 3D FLOATING ELEMENTS
-     ═══════════════════════════════════════════ -->
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-3d-scene">
     <div class="hero-orb orb-1"></div>
@@ -95,9 +94,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     ABOUT — PARALLAX & 3D TILT
-     ═══════════════════════════════════════════ -->
+<!-- ABOUT -->
 <section class="section" id="about">
   <div class="section-header">
     <span class="section-eyebrow">01 — About</span>
@@ -129,9 +126,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     SERVICES — 3D TILT CARDS WITH GLOW
-     ═══════════════════════════════════════════ -->
+<!-- SERVICES -->
 <section class="section" id="services">
   <div class="section-header">
     <span class="section-eyebrow">02 — Services</span>
@@ -196,9 +191,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     PROJECTS — 3D PERSPECTIVE CARDS
-     ═══════════════════════════════════════════ -->
+<!-- PROJECTS -->
 <section class="section" id="projects">
   <div class="section-header">
     <span class="section-eyebrow">03 — Projects</span>
@@ -305,9 +298,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     SKILLS — DUAL DIRECTION MARQUEE WITH GLOW
-     ═══════════════════════════════════════════ -->
+<!-- SKILLS — DUAL DIRECTION MARQUEE WITH GLOW -->
 <section class="section" id="skills">
   <div class="section-header">
     <span class="section-eyebrow">04 — Skills</span>
@@ -315,7 +306,6 @@
     <p class="section-desc">Tools and technologies I wield daily.</p>
   </div>
 
-  <!-- MARQUEE ROW 1: Left to Right -->
   <div class="marquee-container">
     <div class="marquee-track marquee-ltr">
       <div class="marquee-content">
@@ -345,7 +335,6 @@
     </div>
   </div>
 
-  <!-- MARQUEE ROW 2: Right to Left -->
   <div class="marquee-container">
     <div class="marquee-track marquee-rtl">
       <div class="marquee-content">
@@ -375,7 +364,6 @@
     </div>
   </div>
 
-  <!-- MARQUEE ROW 3: Left to Right (Aevibron Special) -->
   <div class="marquee-container">
     <div class="marquee-track marquee-ltr marquee-slow">
       <div class="marquee-content">
@@ -406,9 +394,16 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     EXPERIENCE — 3D TIMELINE
-     ═══════════════════════════════════════════ -->
+<!-- LOTTIE CODING ANIMATION -->
+<section class="lottie-section" id="lottie">
+  <div class="lottie-container">
+    <div class="lottie-glow"></div>
+    <div id="lottie-coding" style="width:400px;height:400px;margin:0 auto;"></div>
+  </div>
+  <p class="lottie-caption">Code. Create. Conquer.</p>
+</section>
+
+<!-- EXPERIENCE -->
 <section class="section" id="experience">
   <div class="section-header">
     <span class="section-eyebrow">05 — Experience</span>
@@ -419,8 +414,7 @@
     <div class="timeline-line"></div>
     <div class="timeline-item reveal-3d-left">
       <div class="timeline-dot"></div>
-      <div class="timeline-card tilt-card">
-        <div class="card-glow"></div>
+      <div class="timeline-card">
         <div class="timeline-role">Founder & Lead AI Architect</div>
         <div class="timeline-company">Infinite Vybeflix / Aevibron</div>
         <div class="timeline-date">2022 — PRESENT</div>
@@ -429,8 +423,7 @@
     </div>
     <div class="timeline-item reveal-3d-right">
       <div class="timeline-dot"></div>
-      <div class="timeline-card tilt-card">
-        <div class="card-glow"></div>
+      <div class="timeline-card">
         <div class="timeline-role">AI Systems Engineer</div>
         <div class="timeline-company">Freelance</div>
         <div class="timeline-date">2021 — 2022</div>
@@ -439,8 +432,7 @@
     </div>
     <div class="timeline-item reveal-3d-left">
       <div class="timeline-dot"></div>
-      <div class="timeline-card tilt-card">
-        <div class="card-glow"></div>
+      <div class="timeline-card">
         <div class="timeline-role">Full-Stack Developer</div>
         <div class="timeline-company">Self-Directed</div>
         <div class="timeline-date">2020 — 2021</div>
@@ -450,9 +442,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     CONTACT — GLASSMORPHISM & ANIMATED BORDERS
-     ═══════════════════════════════════════════ -->
+<!-- CONTACT -->
 <section class="section" id="contact">
   <div class="section-header">
     <span class="section-eyebrow">06 — Contact</span>
@@ -461,35 +451,35 @@
   </div>
   <div class="contact-grid">
     <div class="contact-info reveal-3d-left">
-      <div class="contact-card tilt-card">
+      <div class="contact-card">
         <div class="contact-icon" style="color:#ea4335;"><i class="fas fa-envelope"></i></div>
         <div class="contact-details">
           <span class="contact-label">Email</span>
           <a href="mailto:aevibron@gmail.com" class="contact-value">aevibron@gmail.com</a>
         </div>
       </div>
-      <div class="contact-card tilt-card">
+      <div class="contact-card">
         <div class="contact-icon" style="color:#25D366;"><i class="fab fa-whatsapp"></i></div>
         <div class="contact-details">
           <span class="contact-label">WhatsApp</span>
           <a href="https://wa.me/254116903500" target="_blank" class="contact-value">+254 116 903 500</a>
         </div>
       </div>
-      <div class="contact-card tilt-card">
+      <div class="contact-card">
         <div class="contact-icon" style="color:#d4af37;"><i class="fas fa-map-marker-alt"></i></div>
         <div class="contact-details">
           <span class="contact-label">Location</span>
           <span class="contact-value">Online — Anywhere, Anytime</span>
         </div>
       </div>
-      <div class="contact-card tilt-card">
+      <div class="contact-card">
         <div class="contact-icon" style="color:#a855f7;"><i class="fas fa-clock"></i></div>
         <div class="contact-details">
           <span class="contact-label">Response Time</span>
           <span class="contact-value">Within 24 hours</span>
         </div>
       </div>
-      <div class="contact-card tilt-card">
+      <div class="contact-card">
         <div class="contact-icon" style="color:#d4af37;"><i class="fas fa-broadcast-tower"></i></div>
         <div class="contact-details">
           <span class="contact-label">WhatsApp Channel</span>
@@ -498,8 +488,7 @@
       </div>
     </div>
     <div class="contact-form-wrapper reveal-3d-right">
-      <form class="contact-form animated-border" onsubmit="event.preventDefault(); sendMessage();">
-        <div class="border-glow"></div>
+      <form class="contact-form" onsubmit="event.preventDefault(); sendMessage();">
         <h3>Send a Message</h3>
         <div class="form-group">
           <label for="form-name">Your Name</label>
@@ -521,29 +510,27 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-brand glitch" data-text="AEVIBRON">AEVIBRON</div>
+  <div class="footer-brand">AEVIBRON</div>
   <p class="footer-tagline">Eternal Vibration Particle — Nothing is impossible.</p>
   <div class="footer-social">
-    <a href="mailto:aevibron@gmail.com" class="footer-social-link magnetic-btn" style="color:#ea4335;"><i class="fas fa-envelope"></i></a>
-    <a href="https://wa.me/254116903500" target="_blank" class="footer-social-link magnetic-btn" style="color:#25D366;"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://github.com/luckyfelistine-bot" target="_blank" class="footer-social-link magnetic-btn" style="color:#f0f6fc;"><i class="fab fa-github"></i></a>
-    <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="footer-social-link magnetic-btn" style="color:#d4af37;"><i class="fas fa-broadcast-tower"></i></a>
+    <a href="mailto:aevibron@gmail.com" class="footer-social-link" style="color:#ea4335;"><i class="fas fa-envelope"></i></a>
+    <a href="https://wa.me/254116903500" target="_blank" class="footer-social-link" style="color:#25D366;"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://github.com/luckyfelistine-bot" target="_blank" class="footer-social-link" style="color:#f0f6fc;"><i class="fab fa-github"></i></a>
+    <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="footer-social-link" style="color:#d4af37;"><i class="fas fa-broadcast-tower"></i></a>
   </div>
   <p class="footer-copy">&copy; 2026 Infinite Vybeflix. All rights reserved.</p>
 </footer>
 
 <!-- API MODAL -->
 <div class="modal-overlay" id="api-modal">
-  <div class="modal-box tilt-card">
-    <button class="modal-close magnetic-btn" onclick="closeApiModal()" aria-label="Close"><i class="fas fa-times"></i></button>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeApiModal()" aria-label="Close"><i class="fas fa-times"></i></button>
     <h3>Request API Access</h3>
     <p>Due to security considerations (1M requests/minute capacity), API keys are provided on a case-by-case basis.</p>
     <textarea id="api-usecase" rows="3" placeholder="What do you want to use the API for?"></textarea>
-    <button class="btn btn-primary magnetic-btn" style="width:100%;justify-content:center;" onclick="requestApiKey()">
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="requestApiKey()">
       <i class="fab fa-whatsapp" style="color:#25D366;"></i> Request via WhatsApp
     </button>
   </div>
@@ -553,7 +540,7 @@
 <div class="lightbox" id="lightbox">
   <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
   <div class="lightbox-content">
-    <button class="lightbox-close magnetic-btn" onclick="closeLightbox()" aria-label="Close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close"><i class="fas fa-times"></i></button>
     <img src="" alt="" id="lightbox-img">
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
