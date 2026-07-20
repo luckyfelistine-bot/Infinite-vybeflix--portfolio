@@ -9,43 +9,56 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- PRELOADER — FAST & CLEAN -->
+<!-- ═══════════════════════════════════════════
+     CREATIVE PRELOADER — PARTICLE WARP
+     ═══════════════════════════════════════════ -->
 <div class="preloader" id="preloader">
+  <canvas id="preloader-canvas"></canvas>
   <div class="preloader-content">
-    <div class="preloader-logo">AEVIBRON</div>
-    <div class="preloader-line"><span></span></div>
+    <div class="preloader-logo">
+      <span class="glitch" data-text="AEVIBRON">AEVIBRON</span>
+    </div>
+    <div class="preloader-sub">Initializing Universe...</div>
   </div>
 </div>
 
 <!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursor-trail"></div>
 
 <!-- SCROLL PROGRESS -->
 <div class="scroll-progress" id="scroll-progress"></div>
 
-<!-- BACKGROUND -->
+<!-- AMBIENT BACKGROUND -->
 <div class="bg-gradient"></div>
+<div class="bg-mesh" id="bg-mesh"></div>
 <canvas id="particle-canvas"></canvas>
+<div class="floating-orbs" id="floating-orbs"></div>
 
 <!-- NAVIGATION -->
 <nav class="nav" id="nav">
   <a href="#" class="nav-logo">
-    <img src="images/Aevibron-logo.jpg" alt="Aevibron">
+    <div class="logo-orbit">
+      <img src="images/Aevibron-logo.jpg" alt="Aevibron">
+      <div class="logo-ring"></div>
+    </div>
     <span>Infinite Vybeflix</span>
   </a>
   <ul class="nav-links" id="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" class="nav-link-magnetic">About</a></li>
+    <li><a href="#services" class="nav-link-magnetic">Services</a></li>
+    <li><a href="#projects" class="nav-link-magnetic">Projects</a></li>
+    <li><a href="#skills" class="nav-link-magnetic">Skills</a></li>
+    <li><a href="#experience" class="nav-link-magnetic">Experience</a></li>
+    <li><a href="#contact" class="nav-link-magnetic">Contact</a></li>
   </ul>
-  <a href="https://wa.me/254116903500" target="_blank" class="nav-cta">
+  <a href="https://wa.me/254116903500" target="_blank" class="nav-cta magnetic-btn">
     <span>Let's Talk</span>
     <i class="fab fa-whatsapp" style="color:#25D366;margin-left:6px;"></i>
   </a>
@@ -54,40 +67,50 @@
   </button>
 </nav>
 
-<!-- HERO -->
+<!-- ═══════════════════════════════════════════
+     HERO — 3D FLOATING ELEMENTS
+     ═══════════════════════════════════════════ -->
 <section class="hero" id="hero">
+  <div class="hero-3d-scene">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+    <div class="hero-orb orb-4"></div>
+  </div>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Portfolio 2026</p>
+    <p class="hero-eyebrow scramble-text" data-text="PORTFOLIO 2026">PORTFOLIO 2026</p>
     <h1 class="hero-title">
       <span class="hero-title-gold">INFINITE</span><br>VYBEFLIX
     </h1>
     <p class="hero-subtitle" id="hero-subtitle"></p>
     <div class="hero-stats">
-      <div class="hero-stat">
+      <div class="hero-stat" data-parallax="0.3">
         <span class="hero-stat-num" data-target="3">0</span>
         <span class="hero-stat-label">Years Building</span>
       </div>
-      <div class="hero-stat">
+      <div class="hero-stat" data-parallax="0.5">
         <span class="hero-stat-num" data-target="100">0</span>
         <span class="hero-stat-label">Projects</span>
       </div>
-      <div class="hero-stat">
+      <div class="hero-stat" data-parallax="0.7">
         <span class="hero-stat-num" data-target="1">0</span>
         <span class="hero-stat-label">M+ Req / Min</span>
       </div>
     </div>
     <div class="hero-cta-group">
-      <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
-      <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+      <a href="#projects" class="btn btn-primary magnetic-btn"><i class="fas fa-rocket"></i> View Projects</a>
+      <a href="#contact" class="btn btn-secondary magnetic-btn"><i class="fas fa-paper-plane"></i> Get in Touch</a>
     </div>
   </div>
   <div class="hero-scroll">
-    <span>Scroll</span>
+    <span>Explore</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ═══════════════════════════════════════════
+     ABOUT — PARALLAX & 3D TILT
+     ═══════════════════════════════════════════ -->
 <section class="section" id="about">
   <div class="section-header">
     <span class="section-eyebrow">01 — About</span>
@@ -95,28 +118,33 @@
     <p class="section-desc">Building the future, one line of code at a time.</p>
   </div>
   <div class="about-grid">
-    <div class="about-photo reveal-left">
-      <div class="about-photo-frame">
+    <div class="about-photo reveal-3d-left">
+      <div class="about-photo-frame tilt-card">
+        <div class="holographic-shine"></div>
         <img src="images/Aevibron-advert.png" alt="Aevibron Portrait">
       </div>
     </div>
-    <div class="about-content reveal-right">
+    <div class="about-content reveal-3d-right">
       <h3>Aevibron</h3>
       <p>Founder & Lead AI Architect at <strong>Infinite Vybeflix</strong>. I build out of passion and determination. Every project is a testament to the belief that nothing is impossible.</p>
       <p>Over the past 3+ years, I've shipped <strong>100+ production projects</strong> spanning AI infrastructure, API gateways, intelligent bots, and autonomous systems. My work handles over <strong>1 million requests per minute</strong>.</p>
-      <blockquote class="about-quote">"Nothing is impossible. The word itself says 'I'm possible'."</blockquote>
+      <blockquote class="about-quote">
+        <span class="quote-mark">"</span>Nothing is impossible. The word itself says 'I'm possible'.<span class="quote-mark">"</span>
+      </blockquote>
       <p class="about-location"><i class="fas fa-globe"></i> We work online anywhere anytime</p>
       <div class="about-social">
-        <a href="mailto:aevibron@gmail.com" class="social-link email" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://wa.me/254116903500" target="_blank" class="social-link whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://github.com/luckyfelistine-bot" target="_blank" class="social-link github" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="social-link channel" title="Channel"><i class="fas fa-broadcast-tower"></i></a>
+        <a href="mailto:aevibron@gmail.com" class="social-link email magnetic-btn" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://wa.me/254116903500" target="_blank" class="social-link whatsapp magnetic-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://github.com/luckyfelistine-bot" target="_blank" class="social-link github magnetic-btn" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="social-link channel magnetic-btn" title="Channel"><i class="fas fa-broadcast-tower"></i></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ═══════════════════════════════════════════
+     SERVICES — 3D TILT CARDS WITH GLOW
+     ═══════════════════════════════════════════ -->
 <section class="section" id="services">
   <div class="section-header">
     <span class="section-eyebrow">02 — Services</span>
@@ -124,7 +152,8 @@
     <p class="section-desc">End-to-end solutions powered by AI and modern web technology.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card reveal-up">
+    <div class="service-card tilt-card reveal-3d-up" data-tilt>
+      <div class="card-glow"></div>
       <div class="service-icon"><i class="fas fa-brain"></i></div>
       <h3>AI Solutions</h3>
       <p>Custom AI integrations, intelligent automation, and machine learning pipelines. From NLP to predictive analytics, I build AI systems that think.</p>
@@ -132,7 +161,8 @@
         <span>OpenAI</span><span>Groq</span><span>LangChain</span><span>TensorFlow</span>
       </div>
     </div>
-    <div class="service-card reveal-up delay-1">
+    <div class="service-card tilt-card reveal-3d-up delay-1" data-tilt>
+      <div class="card-glow"></div>
       <div class="service-icon"><i class="fas fa-globe"></i></div>
       <h3>Web Development</h3>
       <p>Modern, responsive web applications with cutting-edge frameworks and pixel-perfect design.</p>
@@ -140,7 +170,8 @@
         <span>React</span><span>Next.js</span><span>Node.js</span>
       </div>
     </div>
-    <div class="service-card reveal-up delay-2">
+    <div class="service-card tilt-card reveal-3d-up delay-2" data-tilt>
+      <div class="card-glow"></div>
       <div class="service-icon"><i class="fas fa-server"></i></div>
       <h3>API Gateway</h3>
       <p>Scalable API infrastructure with intelligent routing, load balancing, and real-time analytics.</p>
@@ -148,7 +179,8 @@
         <span>REST</span><span>GraphQL</span><span>WebSocket</span>
       </div>
     </div>
-    <div class="service-card reveal-up">
+    <div class="service-card tilt-card reveal-3d-up" data-tilt>
+      <div class="card-glow"></div>
       <div class="service-icon"><i class="fas fa-robot"></i></div>
       <h3>WhatsApp Bots</h3>
       <p>Powerful conversational bots with 700+ commands. AI-driven messaging automation for businesses and communities.</p>
@@ -156,7 +188,8 @@
         <span>WhatsApp API</span><span>Baileys</span><span>Node.js</span>
       </div>
     </div>
-    <div class="service-card reveal-up delay-1">
+    <div class="service-card tilt-card reveal-3d-up delay-1" data-tilt>
+      <div class="card-glow"></div>
       <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
       <h3>Mobile Apps</h3>
       <p>Cross-platform mobile experiences with native performance and seamless UX.</p>
@@ -164,7 +197,8 @@
         <span>React Native</span><span>Termux</span>
       </div>
     </div>
-    <div class="service-card reveal-up delay-2">
+    <div class="service-card tilt-card reveal-3d-up delay-2" data-tilt>
+      <div class="card-glow"></div>
       <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
       <h3>System Architecture</h3>
       <p>High-availability infrastructure design. Millions of requests, zero downtime.</p>
@@ -175,7 +209,9 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ═══════════════════════════════════════════
+     PROJECTS — 3D PERSPECTIVE CARDS
+     ═══════════════════════════════════════════ -->
 <section class="section" id="projects">
   <div class="section-header">
     <span class="section-eyebrow">03 — Projects</span>
@@ -183,12 +219,13 @@
     <p class="section-desc">Five products. One mission. Nothing is impossible.</p>
   </div>
   <div class="projects-grid">
-    <div class="project-card reveal-scale">
+    <div class="project-card reveal-3d-scale" data-tilt>
       <div class="project-image-wrap">
         <img src="images/Nuvuja-advert.png" alt="Nuvuja" class="project-image">
         <div class="project-image-overlay">
-          <button class="project-expand" onclick="openLightbox('images/Nuvuja-advert.png','Nuvuja')"><i class="fas fa-expand"></i></button>
+          <button class="project-expand magnetic-btn" onclick="openLightbox('images/Nuvuja-advert.png','Nuvuja')"><i class="fas fa-expand"></i></button>
         </div>
+        <div class="project-glow-border"></div>
       </div>
       <div class="project-body">
         <div class="project-header">
@@ -197,16 +234,17 @@
         </div>
         <p class="project-desc">A next-generation cloud development environment with AI-powered code generation and intelligent autocomplete.</p>
         <div class="project-links">
-          <a href="https://nuvuja.vercel.app" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Visit</a>
+          <a href="https://nuvuja.vercel.app" target="_blank" class="link-btn magnetic-btn"><i class="fas fa-external-link-alt"></i> Visit</a>
         </div>
       </div>
     </div>
-    <div class="project-card reveal-scale delay-1">
+    <div class="project-card reveal-3d-scale delay-1" data-tilt>
       <div class="project-image-wrap">
         <img src="images/Maureonix-advert.png" alt="Maureonix" class="project-image">
         <div class="project-image-overlay">
-          <button class="project-expand" onclick="openLightbox('images/Maureonix-advert.png','Maureonix')"><i class="fas fa-expand"></i></button>
+          <button class="project-expand magnetic-btn" onclick="openLightbox('images/Maureonix-advert.png','Maureonix')"><i class="fas fa-expand"></i></button>
         </div>
+        <div class="project-glow-border"></div>
       </div>
       <div class="project-body">
         <div class="project-header">
@@ -215,16 +253,17 @@
         </div>
         <p class="project-desc">An intelligent WhatsApp assistant with 700+ commands. AI assistance, automation, and group management.</p>
         <div class="project-links">
-          <a href="https://wa.me/254116903500" target="_blank" class="link-btn"><i class="fab fa-whatsapp"></i> Try It</a>
+          <a href="https://wa.me/254116903500" target="_blank" class="link-btn magnetic-btn"><i class="fab fa-whatsapp"></i> Try It</a>
         </div>
       </div>
     </div>
-    <div class="project-card reveal-scale delay-2">
+    <div class="project-card reveal-3d-scale delay-2" data-tilt>
       <div class="project-image-wrap">
         <img src="images/Aevibron-gateway.png" alt="Aevibron Gateway" class="project-image">
         <div class="project-image-overlay">
-          <button class="project-expand" onclick="openLightbox('images/Aevibron-gateway.png','Aevibron Gateway')"><i class="fas fa-expand"></i></button>
+          <button class="project-expand magnetic-btn" onclick="openLightbox('images/Aevibron-gateway.png','Aevibron Gateway')"><i class="fas fa-expand"></i></button>
         </div>
+        <div class="project-glow-border"></div>
       </div>
       <div class="project-body">
         <div class="project-header">
@@ -233,17 +272,18 @@
         </div>
         <p class="project-desc">Unified intelligence layer connecting apps to multiple AI models through one secure API with intelligent routing.</p>
         <div class="project-links">
-          <a href="https://aevibron-gateway.vercel.app" target="_blank" class="link-btn"><i class="fas fa-external-link-alt"></i> Visit</a>
-          <button class="link-btn api" onclick="openApiModal()"><i class="fas fa-key"></i> API Key</button>
+          <a href="https://aevibron-gateway.vercel.app" target="_blank" class="link-btn magnetic-btn"><i class="fas fa-external-link-alt"></i> Visit</a>
+          <button class="link-btn api magnetic-btn" onclick="openApiModal()"><i class="fas fa-key"></i> API Key</button>
         </div>
       </div>
     </div>
-    <div class="project-card reveal-scale">
+    <div class="project-card reveal-3d-scale" data-tilt>
       <div class="project-image-wrap">
         <img src="images/Iris-logo.png" alt="IRIS" class="project-image">
         <div class="project-image-overlay">
-          <button class="project-expand" onclick="openLightbox('images/Iris-logo.png','IRIS')"><i class="fas fa-expand"></i></button>
+          <button class="project-expand magnetic-btn" onclick="openLightbox('images/Iris-logo.png','IRIS')"><i class="fas fa-expand"></i></button>
         </div>
+        <div class="project-glow-border"></div>
       </div>
       <div class="project-body">
         <div class="project-header">
@@ -256,12 +296,13 @@
         </div>
       </div>
     </div>
-    <div class="project-card reveal-scale delay-1">
+    <div class="project-card reveal-3d-scale delay-1" data-tilt>
       <div class="project-image-wrap">
         <img src="images/Kaelum-logo.png" alt="Kaelum" class="project-image">
         <div class="project-image-overlay">
-          <button class="project-expand" onclick="openLightbox('images/Kaelum-logo.png','Kaelum')"><i class="fas fa-expand"></i></button>
+          <button class="project-expand magnetic-btn" onclick="openLightbox('images/Kaelum-logo.png','Kaelum')"><i class="fas fa-expand"></i></button>
         </div>
+        <div class="project-glow-border"></div>
       </div>
       <div class="project-body">
         <div class="project-header">
@@ -277,70 +318,110 @@
   </div>
 </section>
 
-<!-- SKILLS — NO PERCENTAGES -->
+<!-- ═══════════════════════════════════════════
+     SKILLS — DUAL DIRECTION MARQUEE WITH GLOW
+     ═══════════════════════════════════════════ -->
 <section class="section" id="skills">
   <div class="section-header">
     <span class="section-eyebrow">04 — Skills</span>
     <h2 class="section-title">Tech Arsenal</h2>
     <p class="section-desc">Tools and technologies I wield daily.</p>
   </div>
-  <div class="skills-grid">
-    <div class="skill-category reveal-left">
-      <div class="skill-cat-header">
-        <i class="fas fa-code"></i>
-        <h4>Languages</h4>
+
+  <!-- MARQUEE ROW 1: Left to Right -->
+  <div class="marquee-container">
+    <div class="marquee-track marquee-ltr">
+      <div class="marquee-content">
+        <span class="marquee-pill glow-gold"><i class="fab fa-js"></i> JavaScript</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-code"></i> TypeScript</span>
+        <span class="marquee-pill glow-purple"><i class="fab fa-python"></i> Python</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-terminal"></i> Bash</span>
+        <span class="marquee-pill glow-gold"><i class="fab fa-react"></i> React</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-n"></i> Next.js</span>
+        <span class="marquee-pill glow-purple"><i class="fab fa-node-js"></i> Node.js</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-bolt"></i> Express</span>
+        <span class="marquee-pill glow-gold"><i class="fas fa-mobile-alt"></i> React Native</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-wind"></i> Tailwind</span>
       </div>
-      <div class="skill-pills">
-        <span class="skill-pill"><i class="fab fa-js"></i>JavaScript</span>
-        <span class="skill-pill"><i class="fas fa-code"></i>TypeScript</span>
-        <span class="skill-pill"><i class="fab fa-python"></i>Python</span>
-        <span class="skill-pill"><i class="fas fa-terminal"></i>Bash</span>
-      </div>
-    </div>
-    <div class="skill-category reveal-up">
-      <div class="skill-cat-header">
-        <i class="fas fa-layer-group"></i>
-        <h4>Frameworks</h4>
-      </div>
-      <div class="skill-pills">
-        <span class="skill-pill"><i class="fab fa-react"></i>React</span>
-        <span class="skill-pill"><i class="fas fa-n"></i>Next.js</span>
-        <span class="skill-pill"><i class="fab fa-node-js"></i>Node.js</span>
-        <span class="skill-pill"><i class="fas fa-bolt"></i>Express</span>
-        <span class="skill-pill"><i class="fas fa-mobile-alt"></i>React Native</span>
-        <span class="skill-pill"><i class="fas fa-wind"></i>Tailwind</span>
-      </div>
-    </div>
-    <div class="skill-category reveal-up delay-1">
-      <div class="skill-cat-header">
-        <i class="fas fa-brain"></i>
-        <h4>AI & Data</h4>
-      </div>
-      <div class="skill-pills">
-        <span class="skill-pill"><i class="fas fa-brain"></i>OpenAI</span>
-        <span class="skill-pill"><i class="fas fa-robot"></i>Groq</span>
-        <span class="skill-pill"><i class="fas fa-project-diagram"></i>LangChain</span>
-        <span class="skill-pill"><i class="fas fa-database"></i>MongoDB</span>
+      <div class="marquee-content" aria-hidden="true">
+        <span class="marquee-pill glow-gold"><i class="fab fa-js"></i> JavaScript</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-code"></i> TypeScript</span>
+        <span class="marquee-pill glow-purple"><i class="fab fa-python"></i> Python</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-terminal"></i> Bash</span>
+        <span class="marquee-pill glow-gold"><i class="fab fa-react"></i> React</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-n"></i> Next.js</span>
+        <span class="marquee-pill glow-purple"><i class="fab fa-node-js"></i> Node.js</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-bolt"></i> Express</span>
+        <span class="marquee-pill glow-gold"><i class="fas fa-mobile-alt"></i> React Native</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-wind"></i> Tailwind</span>
       </div>
     </div>
-    <div class="skill-category reveal-right">
-      <div class="skill-cat-header">
-        <i class="fas fa-server"></i>
-        <h4>DevOps</h4>
+  </div>
+
+  <!-- MARQUEE ROW 2: Right to Left -->
+  <div class="marquee-container">
+    <div class="marquee-track marquee-rtl">
+      <div class="marquee-content">
+        <span class="marquee-pill glow-emerald"><i class="fas fa-brain"></i> OpenAI</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-robot"></i> Groq</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-project-diagram"></i> LangChain</span>
+        <span class="marquee-pill glow-gold"><i class="fas fa-database"></i> MongoDB</span>
+        <span class="marquee-pill glow-emerald"><i class="fab fa-docker"></i> Docker</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-cloud"></i> Vercel</span>
+        <span class="marquee-pill glow-cyan"><i class="fab fa-git-alt"></i> Git</span>
+        <span class="marquee-pill glow-gold"><i class="fas fa-server"></i> REST APIs</span>
+        <span class="marquee-pill glow-emerald"><i class="fas fa-shield-alt"></i> Security</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-chart-line"></i> Analytics</span>
       </div>
-      <div class="skill-pills">
-        <span class="skill-pill"><i class="fab fa-docker"></i>Docker</span>
-        <span class="skill-pill"><i class="fas fa-cloud"></i>Vercel</span>
-        <span class="skill-pill"><i class="fab fa-git-alt"></i>Git</span>
-        <span class="skill-pill"><i class="fas fa-server"></i>REST APIs</span>
-        <span class="skill-pill"><i class="fas fa-shield-alt"></i>Security</span>
-        <span class="skill-pill"><i class="fas fa-chart-line"></i>Analytics</span>
+      <div class="marquee-content" aria-hidden="true">
+        <span class="marquee-pill glow-emerald"><i class="fas fa-brain"></i> OpenAI</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-robot"></i> Groq</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-project-diagram"></i> LangChain</span>
+        <span class="marquee-pill glow-gold"><i class="fas fa-database"></i> MongoDB</span>
+        <span class="marquee-pill glow-emerald"><i class="fab fa-docker"></i> Docker</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-cloud"></i> Vercel</span>
+        <span class="marquee-pill glow-cyan"><i class="fab fa-git-alt"></i> Git</span>
+        <span class="marquee-pill glow-gold"><i class="fas fa-server"></i> REST APIs</span>
+        <span class="marquee-pill glow-emerald"><i class="fas fa-shield-alt"></i> Security</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-chart-line"></i> Analytics</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE ROW 3: Left to Right (Aevibron Special) -->
+  <div class="marquee-container">
+    <div class="marquee-track marquee-ltr marquee-slow">
+      <div class="marquee-content">
+        <span class="marquee-pill glow-gold aevibron-pill"><i class="fas fa-infinity"></i> Aevibron Gateway</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-key"></i> API Management</span>
+        <span class="marquee-pill glow-purple"><i class="fas fa-network-wired"></i> Load Balancing</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-bolt"></i> 1M+ RPS</span>
+        <span class="marquee-pill glow-emerald"><i class="fas fa-shield-alt"></i> Secure Routing</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-chart-bar"></i> Real-time Analytics</span>
+        <span class="marquee-pill glow-gold aevibron-pill"><i class="fas fa-infinity"></i> Aevibron Gateway</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-key"></i> API Management</span>
+        <span class="marquee-pill glow-purple"><i class="fas fa-network-wired"></i> Load Balancing</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-bolt"></i> 1M+ RPS</span>
+      </div>
+      <div class="marquee-content" aria-hidden="true">
+        <span class="marquee-pill glow-gold aevibron-pill"><i class="fas fa-infinity"></i> Aevibron Gateway</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-key"></i> API Management</span>
+        <span class="marquee-pill glow-purple"><i class="fas fa-network-wired"></i> Load Balancing</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-bolt"></i> 1M+ RPS</span>
+        <span class="marquee-pill glow-emerald"><i class="fas fa-shield-alt"></i> Secure Routing</span>
+        <span class="marquee-pill glow-amber"><i class="fas fa-chart-bar"></i> Real-time Analytics</span>
+        <span class="marquee-pill glow-gold aevibron-pill"><i class="fas fa-infinity"></i> Aevibron Gateway</span>
+        <span class="marquee-pill glow-cyan"><i class="fas fa-key"></i> API Management</span>
+        <span class="marquee-pill glow-purple"><i class="fas fa-network-wired"></i> Load Balancing</span>
+        <span class="marquee-pill glow-rose"><i class="fas fa-bolt"></i> 1M+ RPS</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- ═══════════════════════════════════════════
+     EXPERIENCE — 3D TIMELINE
+     ═══════════════════════════════════════════ -->
 <section class="section" id="experience">
   <div class="section-header">
     <span class="section-eyebrow">05 — Experience</span>
@@ -349,27 +430,30 @@
   </div>
   <div class="timeline">
     <div class="timeline-line"></div>
-    <div class="timeline-item reveal-left">
+    <div class="timeline-item reveal-3d-left">
       <div class="timeline-dot"></div>
-      <div class="timeline-card">
+      <div class="timeline-card tilt-card">
+        <div class="card-glow"></div>
         <div class="timeline-role">Founder & Lead AI Architect</div>
         <div class="timeline-company">Infinite Vybeflix / Aevibron</div>
         <div class="timeline-date">2022 — PRESENT</div>
         <p class="timeline-desc">Built AI infrastructure handling 1M+ requests per minute. Architected and launched 5+ production AI products including Nuvuja IDE, Aevibron Gateway, and Maureonix WhatsApp Bot.</p>
       </div>
     </div>
-    <div class="timeline-item reveal-right">
+    <div class="timeline-item reveal-3d-right">
       <div class="timeline-dot"></div>
-      <div class="timeline-card">
+      <div class="timeline-card tilt-card">
+        <div class="card-glow"></div>
         <div class="timeline-role">AI Systems Engineer</div>
         <div class="timeline-company">Freelance</div>
         <div class="timeline-date">2021 — 2022</div>
         <p class="timeline-desc">Delivered custom AI-powered solutions for clients worldwide. Built intelligent chatbots, automation pipelines, and data processing systems.</p>
       </div>
     </div>
-    <div class="timeline-item reveal-left">
+    <div class="timeline-item reveal-3d-left">
       <div class="timeline-dot"></div>
-      <div class="timeline-card">
+      <div class="timeline-card tilt-card">
+        <div class="card-glow"></div>
         <div class="timeline-role">Full-Stack Developer</div>
         <div class="timeline-company">Self-Directed</div>
         <div class="timeline-date">2020 — 2021</div>
@@ -379,7 +463,9 @@
   </div>
 </section>
 
-<!-- CONTACT — PROFESSIONAL -->
+<!-- ═══════════════════════════════════════════
+     CONTACT — GLASSMORPHISM & ANIMATED BORDERS
+     ═══════════════════════════════════════════ -->
 <section class="section" id="contact">
   <div class="section-header">
     <span class="section-eyebrow">06 — Contact</span>
@@ -387,36 +473,36 @@
     <p class="section-desc">Available for freelance, contract, and full-time opportunities.</p>
   </div>
   <div class="contact-grid">
-    <div class="contact-info reveal-left">
-      <div class="contact-card">
+    <div class="contact-info reveal-3d-left">
+      <div class="contact-card tilt-card">
         <div class="contact-icon" style="color:#ea4335;"><i class="fas fa-envelope"></i></div>
         <div class="contact-details">
           <span class="contact-label">Email</span>
           <a href="mailto:aevibron@gmail.com" class="contact-value">aevibron@gmail.com</a>
         </div>
       </div>
-      <div class="contact-card">
+      <div class="contact-card tilt-card">
         <div class="contact-icon" style="color:#25D366;"><i class="fab fa-whatsapp"></i></div>
         <div class="contact-details">
           <span class="contact-label">WhatsApp</span>
           <a href="https://wa.me/254116903500" target="_blank" class="contact-value">+254 116 903 500</a>
         </div>
       </div>
-      <div class="contact-card">
+      <div class="contact-card tilt-card">
         <div class="contact-icon" style="color:#d4af37;"><i class="fas fa-map-marker-alt"></i></div>
         <div class="contact-details">
           <span class="contact-label">Location</span>
           <span class="contact-value">Online — Anywhere, Anytime</span>
         </div>
       </div>
-      <div class="contact-card">
+      <div class="contact-card tilt-card">
         <div class="contact-icon" style="color:#a855f7;"><i class="fas fa-clock"></i></div>
         <div class="contact-details">
           <span class="contact-label">Response Time</span>
           <span class="contact-value">Within 24 hours</span>
         </div>
       </div>
-      <div class="contact-card">
+      <div class="contact-card tilt-card">
         <div class="contact-icon" style="color:#d4af37;"><i class="fas fa-broadcast-tower"></i></div>
         <div class="contact-details">
           <span class="contact-label">WhatsApp Channel</span>
@@ -424,8 +510,9 @@
         </div>
       </div>
     </div>
-    <div class="contact-form-wrapper reveal-right">
-      <form class="contact-form" onsubmit="event.preventDefault(); sendMessage();">
+    <div class="contact-form-wrapper reveal-3d-right">
+      <form class="contact-form animated-border" onsubmit="event.preventDefault(); sendMessage();">
+        <div class="border-glow"></div>
         <h3>Send a Message</h3>
         <div class="form-group">
           <label for="form-name">Your Name</label>
@@ -439,7 +526,7 @@
           <label for="form-message">Your Message</label>
           <textarea id="form-message" rows="4" placeholder="Tell me about your project..."></textarea>
         </div>
-        <button type="submit" class="btn btn-whatsapp">
+        <button type="submit" class="btn btn-whatsapp magnetic-btn">
           <i class="fab fa-whatsapp" style="color:#fff;"></i> Send via WhatsApp
         </button>
       </form>
@@ -447,27 +534,29 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
 <footer class="footer">
-  <div class="footer-brand">AEVIBRON</div>
+  <div class="footer-brand glitch" data-text="AEVIBRON">AEVIBRON</div>
   <p class="footer-tagline">Eternal Vibration Particle — Nothing is impossible.</p>
   <div class="footer-social">
-    <a href="mailto:aevibron@gmail.com" class="footer-social-link" style="color:#ea4335;"><i class="fas fa-envelope"></i></a>
-    <a href="https://wa.me/254116903500" target="_blank" class="footer-social-link" style="color:#25D366;"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://github.com/luckyfelistine-bot" target="_blank" class="footer-social-link" style="color:#f0f6fc;"><i class="fab fa-github"></i></a>
-    <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="footer-social-link" style="color:#d4af37;"><i class="fas fa-broadcast-tower"></i></a>
+    <a href="mailto:aevibron@gmail.com" class="footer-social-link magnetic-btn" style="color:#ea4335;"><i class="fas fa-envelope"></i></a>
+    <a href="https://wa.me/254116903500" target="_blank" class="footer-social-link magnetic-btn" style="color:#25D366;"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://github.com/luckyfelistine-bot" target="_blank" class="footer-social-link magnetic-btn" style="color:#f0f6fc;"><i class="fab fa-github"></i></a>
+    <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="footer-social-link magnetic-btn" style="color:#d4af37;"><i class="fas fa-broadcast-tower"></i></a>
   </div>
   <p class="footer-copy">&copy; 2026 Infinite Vybeflix. All rights reserved.</p>
 </footer>
 
 <!-- API MODAL -->
 <div class="modal-overlay" id="api-modal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeApiModal()" aria-label="Close"><i class="fas fa-times"></i></button>
+  <div class="modal-box tilt-card">
+    <button class="modal-close magnetic-btn" onclick="closeApiModal()" aria-label="Close"><i class="fas fa-times"></i></button>
     <h3>Request API Access</h3>
     <p>Due to security considerations (1M requests/minute capacity), API keys are provided on a case-by-case basis.</p>
     <textarea id="api-usecase" rows="3" placeholder="What do you want to use the API for?"></textarea>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="requestApiKey()">
+    <button class="btn btn-primary magnetic-btn" style="width:100%;justify-content:center;" onclick="requestApiKey()">
       <i class="fab fa-whatsapp" style="color:#25D366;"></i> Request via WhatsApp
     </button>
   </div>
@@ -477,7 +566,7 @@
 <div class="lightbox" id="lightbox">
   <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
   <div class="lightbox-content">
-    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-close magnetic-btn" onclick="closeLightbox()" aria-label="Close"><i class="fas fa-times"></i></button>
     <img src="" alt="" id="lightbox-img">
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>

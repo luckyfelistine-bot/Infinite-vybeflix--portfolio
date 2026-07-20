@@ -1,19 +1,86 @@
 /* ═══════════════════════════════════════════
-   INFINITE VYBEFLIX PORTFOLIO — SCRIPT
-   Clean, Professional, Interview-Ready
+   INFINITE VYBEFLIX PORTFOLIO — UPGRADED SCRIPT
+   3D Effects, Lottie, GSAP, Magnetic Buttons
    ═══════════════════════════════════════════ */
 
-/* PRELOADER — FAST */
+/* ═══════════════════════════════════════════
+   PRELOADER — PARTICLE WARP + FAST LOAD
+   ═══════════════════════════════════════════ */
+const preloaderCanvas = document.getElementById('preloader-canvas');
+const preloaderCtx = preloaderCanvas ? preloaderCanvas.getContext('2d') : null;
+let preloaderParticles = [];
+let preloaderW = 0, preloaderH = 0;
+
+function resizePreloaderCanvas() {
+  if (!preloaderCanvas) return;
+  preloaderW = preloaderCanvas.width = window.innerWidth;
+  preloaderH = preloaderCanvas.height = window.innerHeight;
+}
+if (preloaderCanvas) {
+  resizePreloaderCanvas();
+  window.addEventListener('resize', resizePreloaderCanvas);
+
+  class PreloaderParticle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = preloaderW / 2;
+      this.y = preloaderH / 2;
+      this.angle = Math.random() * Math.PI * 2;
+      this.speed = Math.random() * 3 + 1;
+      this.size = Math.random() * 2 + 0.5;
+      this.life = 0;
+      this.maxLife = Math.random() * 100 + 60;
+      this.alpha = 1;
+      this.color = Math.random() > 0.5 ? '212,175,55' : '0,212,255';
+    }
+    update() {
+      this.x += Math.cos(this.angle) * this.speed;
+      this.y += Math.sin(this.angle) * this.speed;
+      this.life++;
+      this.alpha = 1 - (this.life / this.maxLife);
+      if (this.life >= this.maxLife) this.reset();
+    }
+    draw() {
+      preloaderCtx.beginPath();
+      preloaderCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      preloaderCtx.fillStyle = `rgba(${this.color},${this.alpha})`;
+      preloaderCtx.fill();
+    }
+  }
+
+  for (let i = 0; i < 120; i++) preloaderParticles.push(new PreloaderParticle());
+
+  let preloaderFrame = 0;
+  function animatePreloader() {
+    if (!preloaderCanvas) return;
+    preloaderCtx.fillStyle = 'rgba(2,2,5,0.15)';
+    preloaderCtx.fillRect(0, 0, preloaderW, preloaderH);
+    preloaderParticles.forEach(p => { p.update(); p.draw(); });
+    preloaderFrame++;
+    if (!document.getElementById('preloader').classList.contains('hidden')) {
+      requestAnimationFrame(animatePreloader);
+    }
+  }
+  animatePreloader();
+}
+
+/* FAST PRELOADER EXIT */
 window.addEventListener('load', () => {
   setTimeout(() => {
     const preloader = document.getElementById('preloader');
     if (preloader) preloader.classList.add('hidden');
-  }, 600);
+  }, 1800);
 });
 
-/* CUSTOM CURSOR */
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR + TRAIL
+   ═══════════════════════════════════════════ */
 const cursor = document.getElementById('cursor');
+const cursorTrail = document.getElementById('cursor-trail');
 let cx = 0, cy = 0, tx = 0, ty = 0;
+let trailX = 0, trailY = 0;
 
 if (cursor && !window.matchMedia('(pointer: coarse)').matches) {
   document.addEventListener('mousemove', (e) => {
@@ -25,11 +92,18 @@ if (cursor && !window.matchMedia('(pointer: coarse)').matches) {
     cy += (ty - cy) * 0.14;
     cursor.style.left = cx + 'px';
     cursor.style.top = cy + 'px';
+
+    if (cursorTrail) {
+      trailX += (tx - trailX) * 0.08;
+      trailY += (ty - trailY) * 0.08;
+      cursorTrail.style.left = trailX + 'px';
+      cursorTrail.style.top = trailY + 'px';
+    }
     requestAnimationFrame(updateCursor);
   }
   updateCursor();
 
-  const hoverTargets = 'a, button, .nav-toggle, .service-card, .project-card, .skill-pill, .link-btn, .project-expand, .social-link, .footer-social-link, .modal-close, .lightbox-close';
+  const hoverTargets = 'a, button, .nav-toggle, .service-card, .project-card, .skill-pill, .link-btn, .project-expand, .social-link, .footer-social-link, .modal-close, .lightbox-close, .marquee-pill';
   document.querySelectorAll(hoverTargets).forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -40,7 +114,9 @@ if (cursor && !window.matchMedia('(pointer: coarse)').matches) {
   });
 }
 
-/* SCROLL PROGRESS */
+/* ═══════════════════════════════════════════
+   SCROLL PROGRESS
+   ═══════════════════════════════════════════ */
 const scrollProgress = document.getElementById('scroll-progress');
 window.addEventListener('scroll', () => {
   if (!scrollProgress) return;
@@ -49,7 +125,9 @@ window.addEventListener('scroll', () => {
   scrollProgress.style.width = (scrollTop / docHeight * 100) + '%';
 });
 
-/* NAV SCROLL EFFECT */
+/* ═══════════════════════════════════════════
+   NAV SCROLL EFFECT
+   ═══════════════════════════════════════════ */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -71,7 +149,9 @@ if (navToggle && navLinks) {
   });
 }
 
-/* PARTICLE NETWORK CANVAS */
+/* ═══════════════════════════════════════════
+   PARTICLE NETWORK CANVAS
+   ═══════════════════════════════════════════ */
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas ? canvas.getContext('2d') : null;
 let particles = [];
@@ -147,7 +227,9 @@ if (canvas) {
   document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
 }
 
-/* HERO TYPEWRITER */
+/* ═══════════════════════════════════════════
+   HERO TYPEWRITER
+   ═══════════════════════════════════════════ */
 const subtitle = document.getElementById('hero-subtitle');
 const phrases = [
   'Founder & Lead AI Architect',
@@ -181,7 +263,9 @@ function typeWriter() {
 }
 if (subtitle) setTimeout(typeWriter, 1000);
 
-/* HERO STATS COUNTER */
+/* ═══════════════════════════════════════════
+   HERO STATS COUNTER
+   ═══════════════════════════════════════════ */
 let statsAnimated = false;
 function animateStats() {
   if (statsAnimated) return;
@@ -202,7 +286,9 @@ function animateStats() {
   });
 }
 
-/* SCROLL REVEAL */
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL — 3D VARIANTS
+   ═══════════════════════════════════════════ */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -212,11 +298,37 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+document.querySelectorAll('.reveal-3d-up, .reveal-3d-left, .reveal-3d-right, .reveal-3d-scale, .reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
   revealObserver.observe(el);
 });
 
-/* SERVICE CARD SPOTLIGHT */
+/* ═══════════════════════════════════════════
+   3D TILT CARDS
+   ═══════════════════════════════════════════ */
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+
+    const shine = card.querySelector('.holographic-shine');
+    if (shine) {
+      shine.style.backgroundPosition = `${(x / rect.width) * 100}% ${(y / rect.height) * 100}%`;
+    }
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+  });
+});
+
+/* ═══════════════════════════════════════════
+   SERVICE CARD SPOTLIGHT
+   ═══════════════════════════════════════════ */
 document.querySelectorAll('.service-card').forEach(card => {
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
@@ -227,7 +339,24 @@ document.querySelectorAll('.service-card').forEach(card => {
   });
 });
 
-/* LIGHTBOX */
+/* ═══════════════════════════════════════════
+   MAGNETIC BUTTONS
+   ═══════════════════════════════════════════ */
+document.querySelectorAll('.magnetic-btn').forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'translate(0, 0)';
+  });
+});
+
+/* ═══════════════════════════════════════════
+   LIGHTBOX
+   ═══════════════════════════════════════════ */
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
@@ -252,7 +381,9 @@ if (lightbox) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 }
 
-/* API MODAL */
+/* ═══════════════════════════════════════════
+   API MODAL
+   ═══════════════════════════════════════════ */
 const apiModal = document.getElementById('api-modal');
 const apiUseCase = document.getElementById('api-usecase');
 
@@ -275,7 +406,9 @@ if (apiModal) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeApiModal(); });
 }
 
-/* CONTACT FORM → WHATSAPP */
+/* ═══════════════════════════════════════════
+   CONTACT FORM → WHATSAPP
+   ═══════════════════════════════════════════ */
 function sendMessage() {
   const name = document.getElementById('form-name')?.value.trim() || '';
   const email = document.getElementById('form-email')?.value.trim() || '';
@@ -289,7 +422,9 @@ function sendMessage() {
   showToast('Message opened in WhatsApp');
 }
 
-/* TOAST */
+/* ═══════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════ */
 const toast = document.getElementById('toast');
 const toastMsg = document.getElementById('toast-msg');
 let toastTimeout;
@@ -301,7 +436,9 @@ function showToast(msg) {
   toastTimeout = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-/* SMOOTH SCROLL */
+/* ═══════════════════════════════════════════
+   SMOOTH SCROLL
+   ═══════════════════════════════════════════ */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
@@ -316,12 +453,214 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/* INIT */
+/* ═══════════════════════════════════════════
+   LOTTIE ANIMATION — CODING.JSON
+   ═══════════════════════════════════════════ */
+function initLottie() {
+  const lottieContainer = document.getElementById('lottie-coding');
+  if (!lottieContainer) return;
+
+  // Try lottie-web first, then fallback to simple SVG animation
+  if (typeof lottie !== 'undefined') {
+    lottie.loadAnimation({
+      container: lottieContainer,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'Coding.json'
+    });
+  } else {
+    // Fallback: create a simple animated code icon
+    lottieContainer.innerHTML = `
+      <div style="width:200px;height:200px;margin:0 auto;position:relative;">
+        <div style="position:absolute;inset:0;border:2px solid rgba(212,175,55,0.3);border-radius:16px;display:flex;align-items:center;justify-content:center;animation: codePulse 2s ease-in-out infinite;">
+          <i class="fas fa-code" style="font-size:64px;color:var(--gold);text-shadow:0 0 30px rgba(212,175,55,0.5);"></i>
+        </div>
+        <div style="position:absolute;inset:-4px;border:1px solid rgba(0,212,255,0.2);border-radius:18px;animation: codePulse 2s ease-in-out infinite 0.5s;"></div>
+      </div>
+    `;
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes codePulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   GSAP SCROLL TRIGGER ANIMATIONS
+   ═══════════════════════════════════════════ */
+function initGSAP() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero parallax
+  gsap.utils.toArray('.hero-orb').forEach((orb, i) => {
+    gsap.to(orb, {
+      y: (i + 1) * 80,
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1
+      }
+    });
+  });
+
+  // Section headers
+  gsap.utils.toArray('.section-header').forEach(header => {
+    gsap.from(header, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: header,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+
+  // Timeline items
+  gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+    gsap.from(item, {
+      x: i % 2 === 0 ? -60 : 60,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+
+  // Contact cards stagger
+  gsap.from('.contact-card', {
+    y: 40,
+    opacity: 0,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.contact-info',
+      start: 'top 80%',
+      toggleActions: 'play none none none'
+    }
+  });
+
+  // Marquee glow intensity on scroll
+  gsap.utils.toArray('.marquee-container').forEach(marquee => {
+    gsap.to(marquee, {
+      scrollTrigger: {
+        trigger: marquee,
+        start: 'top 90%',
+        end: 'bottom 10%',
+        onEnter: () => marquee.classList.add('marquee-active'),
+        onLeave: () => marquee.classList.remove('marquee-active'),
+        onEnterBack: () => marquee.classList.add('marquee-active'),
+        onLeaveBack: () => marquee.classList.remove('marquee-active')
+      }
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════
+   TEXT SCRAMBLE EFFECT
+   ═══════════════════════════════════════════ */
+class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.chars = '!<>-_\/[]{}—=+*^?#________';
+    this.update = this.update.bind(this);
+  }
+  setText(newText) {
+    const oldText = this.el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    const promise = new Promise((resolve) => this.resolve = resolve);
+    this.queue = [];
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
+      const start = Math.floor(Math.random() * 20);
+      const end = start + Math.floor(Math.random() * 20);
+      this.queue.push({ from, to, start, end });
+    }
+    cancelAnimationFrame(this.frameRequest);
+    this.frame = 0;
+    this.update();
+    return promise;
+  }
+  update() {
+    let output = '';
+    let complete = 0;
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      if (this.frame >= end) {
+        complete++;
+        output += to;
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = this.randomChar();
+          this.queue[i].char = char;
+        }
+        output += `<span style="color:var(--cyan);opacity:0.7;">${char}</span>`;
+      } else {
+        output += from;
+      }
+    }
+    this.el.innerHTML = output;
+    if (complete === this.queue.length) {
+      this.resolve();
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update);
+      this.frame++;
+    }
+  }
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  // Stats animation on load
   const heroStatsEl = document.querySelector('.hero-stats');
   if (heroStatsEl) {
     const rect = heroStatsEl.getBoundingClientRect();
     if (rect.top < window.innerHeight) animateStats();
   }
+
+  // Make hero elements visible immediately
   document.querySelectorAll('.hero .reveal-up, .hero-stat').forEach(el => el.classList.add('visible'));
+
+  // Scramble text effect
+  document.querySelectorAll('.scramble-text').forEach(el => {
+    const fx = new TextScramble(el);
+    const original = el.dataset.text || el.innerText;
+    setTimeout(() => fx.setText(original), 800);
+  });
+
+  // Init Lottie
+  initLottie();
+
+  // Init GSAP
+  initGSAP();
+
+  // Parallax on hero stats
+  document.querySelectorAll('.hero-stat').forEach(stat => {
+    const speed = parseFloat(stat.dataset.parallax) || 0.3;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY * speed;
+      stat.style.transform = `translateY(${y}px)`;
+    });
+  });
 });
