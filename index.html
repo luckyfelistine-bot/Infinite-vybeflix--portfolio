@@ -6,33 +6,76 @@
 <title>Infinite Vybeflix — Aevibron Portfolio</title>
 <meta name="description" content="Infinite Vybeflix by Aevibron. AI Architect, Full-Stack Developer, Builder of Nuvuja, Maureonix, Aevibron Gateway, IRIS, and Kaelum.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"></div>
+<!-- ════════════════════════════════════════════════════════════
+     PRELOADER
+     ════════════════════════════════════════════════════════════ -->
+<div class="preloader" id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo">AEVIBRON</div>
+    <div class="preloader-bar">
+      <div class="preloader-progress"></div>
+    </div>
+    <div class="preloader-text">Initializing<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+  </div>
+</div>
 
-<!-- Background -->
-<div class="aurora-bg"></div>
+<!-- ════════════════════════════════════════════════════════════
+     SCAN LINES & NOISE OVERLAY
+     ════════════════════════════════════════════════════════════ -->
+<div class="scanlines"></div>
+<div class="noise-overlay"></div>
+<div class="vignette"></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     CUSTOM CURSOR
+     ════════════════════════════════════════════════════════════ -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursor-trail"></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     SCROLL PROGRESS
+     ════════════════════════════════════════════════════════════ -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     BACKGROUND
+     ════════════════════════════════════════════════════════════ -->
+<div class="aurora-bg">
+  <div class="aurora-blob blob-1"></div>
+  <div class="aurora-blob blob-2"></div>
+  <div class="aurora-blob blob-3"></div>
+  <div class="aurora-blob blob-4"></div>
+</div>
 <canvas id="particle-canvas"></canvas>
 
-<!-- Navigation -->
+<!-- ════════════════════════════════════════════════════════════
+     NAVIGATION
+     ════════════════════════════════════════════════════════════ -->
 <nav class="nav" id="nav">
   <a href="#" class="nav-logo">
-    <img src="images/Aevibron-logo.jpg" alt="Aevibron">
+    <div class="logo-glow"></div>
+    <img src="images/Aevibron-logo.jpg" alt="Aevibron" onerror="this.style.display='none'">
     <span>Infinite Vybeflix</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about" data-text="About">About</a></li>
+    <li><a href="#services" data-text="Services">Services</a></li>
+    <li><a href="#projects" data-text="Projects">Projects</a></li>
+    <li><a href="#skills" data-text="Skills">Skills</a></li>
+    <li><a href="#experience" data-text="Journey">Journey</a></li>
+    <li><a href="#contact" data-text="Contact">Contact</a></li>
   </ul>
-  <a href="https://wa.me/254116903500" target="_blank" class="nav-cta">Let's Talk</a>
+  <a href="https://wa.me/254116903500" target="_blank" class="nav-cta magnetic">
+    <span>Let's Talk</span>
+    <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+  </a>
   <div class="nav-toggle" id="nav-toggle">
     <span></span><span></span><span></span>
   </div>
@@ -42,34 +85,48 @@
      HERO
      ════════════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
+  <div class="hero-grid-bg"></div>
   <div class="hero-content">
-    <div class="hero-label">Portfolio 2026</div>
+    <div class="hero-label glitch-text" data-text="PORTFOLIO 2026">Portfolio 2026</div>
     <h1 class="hero-title">
-      <span class="gold">INFINITE</span><br>VYBEFLIX
+      <span class="gold" id="hero-gold">INFINITE</span><br>
+      <span id="hero-vybeflix">VYBEFLIX</span>
     </h1>
-    <p class="hero-subtitle" id="hero-subtitle"></p>
+    <p class="hero-subtitle" id="hero-subtitle"><span class="typing-cursor">|</span></p>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="num">3+</span>
+      <div class="hero-stat" data-count="3">
+        <span class="num">0</span>
         <span class="lbl">Years Building</span>
       </div>
-      <div class="hero-stat">
-        <span class="num">100+</span>
+      <div class="hero-stat" data-count="100">
+        <span class="num">0</span>
         <span class="lbl">Projects</span>
       </div>
-      <div class="hero-stat">
-        <span class="num">1M+</span>
-        <span class="lbl">Req / Min</span>
+      <div class="hero-stat" data-count="1">
+        <span class="num">0</span>
+        <span class="lbl">M+ Req / Min</span>
       </div>
     </div>
     <div class="hero-cta-group">
-      <a href="#projects" class="btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
-      <a href="#contact" class="btn-secondary"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+      <a href="#projects" class="btn-primary magnetic">
+        <span class="btn-text"><i class="fas fa-rocket"></i> View Projects</span>
+        <span class="btn-shine"></span>
+      </a>
+      <a href="#contact" class="btn-secondary magnetic">
+        <span class="btn-text"><i class="fas fa-paper-plane"></i> Get in Touch</span>
+      </a>
     </div>
   </div>
   <div class="scroll-indicator">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span>Scroll to explore</span>
+  </div>
+  <div class="hero-decoration">
+    <div class="deco-ring ring-1"></div>
+    <div class="deco-ring ring-2"></div>
+    <div class="deco-ring ring-3"></div>
   </div>
 </section>
 
@@ -77,26 +134,45 @@
      ABOUT
      ════════════════════════════════════════════════════════════ -->
 <section class="section" id="about">
-  <div class="section-header reveal">
+  <div class="section-header reveal-up">
     <div class="section-label">01 — About</div>
     <h2 class="section-title">The Architect</h2>
     <p class="section-subtitle">Building the future, one line of code at a time.</p>
   </div>
   <div class="about-grid">
-    <div class="about-photo reveal">
-      <img src="images/Aevibron-advert.png" alt="Aevibron">
+    <div class="about-photo reveal-left">
+      <div class="photo-frame">
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <img src="images/Aevibron-advert.png" alt="Aevibron" onerror="this.parentElement.classList.add('no-image')">
+        <div class="photo-scan"></div>
+      </div>
+      <div class="photo-glow"></div>
     </div>
-    <div class="about-content reveal reveal-delay-1">
+    <div class="about-content reveal-right">
       <h3>Aevibron</h3>
-      <p>Founder & Lead AI Architect at Infinite Vybeflix. I build out of passion and determination. Every project is a testament to the belief that nothing is impossible.</p>
-      <p>Over the past 3+ years, I've shipped 100+ production projects spanning AI infrastructure, API gateways, intelligent bots, and autonomous systems. My work handles over 1 million requests per minute.</p>
-      <div class="about-quote">"Nothing is impossible. The word itself says 'I'm possible'."</div>
-      <p style="color:var(--cyan);font-weight:500;font-size:13px;"><i class="fas fa-globe" style="margin-right:6px;"></i>We work online anywhere anytime</p>
+      <p>Founder & Lead AI Architect at <span class="highlight">Infinite Vybeflix</span>. I build out of passion and determination. Every project is a testament to the belief that nothing is impossible.</p>
+      <p>Over the past 3+ years, I've shipped <span class="highlight">100+ production projects</span> spanning AI infrastructure, API gateways, intelligent bots, and autonomous systems. My work handles over <span class="highlight">1 million requests per minute</span>.</p>
+      <div class="about-quote">
+        <i class="fas fa-quote-left quote-icon"></i>
+        <span>Nothing is impossible. The word itself says 'I'm possible'.</span>
+      </div>
+      <p class="about-location"><i class="fas fa-globe"></i> We work online anywhere anytime</p>
       <div class="about-social">
-        <a href="mailto:aevibron@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://wa.me/254116903500" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://github.com/luckyfelistine-bot" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" title="Channel"><i class="fas fa-broadcast-tower"></i></a>
+        <a href="mailto:aevibron@gmail.com" title="Email" class="social-btn email magnetic">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://wa.me/254116903500" target="_blank" title="WhatsApp" class="social-btn whatsapp magnetic">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://github.com/luckyfelistine-bot" target="_blank" title="GitHub" class="social-btn github magnetic">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" title="Channel" class="social-btn channel magnetic">
+          <i class="fas fa-broadcast-tower"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -106,47 +182,71 @@
      SERVICES — BENTO GRID
      ════════════════════════════════════════════════════════════ -->
 <section class="section" id="services">
-  <div class="section-header reveal">
+  <div class="section-header reveal-up">
     <div class="section-label">02 — Services</div>
     <h2 class="section-title">What I Build</h2>
     <p class="section-subtitle">End-to-end solutions powered by AI and modern web technology.</p>
   </div>
   <div class="bento-grid">
-    <div class="bento-card large reveal">
+    <div class="bento-card large reveal-scale" data-tilt>
+      <div class="bento-spotlight"></div>
       <div class="bento-icon"><i class="fas fa-brain"></i></div>
       <h3>AI Solutions</h3>
       <p>Custom AI integrations, intelligent automation, and machine learning pipelines. From natural language processing to predictive analytics, I build AI systems that think.</p>
-      <div class="bento-meta">OpenAI · Groq · LangChain · TensorFlow</div>
+      <div class="bento-meta">
+        <span>OpenAI</span><span>·</span><span>Groq</span><span>·</span><span>LangChain</span><span>·</span><span>TensorFlow</span>
+      </div>
+      <div class="bento-shine"></div>
     </div>
-    <div class="bento-card reveal reveal-delay-1">
+    <div class="bento-card reveal-left" data-tilt>
+      <div class="bento-spotlight"></div>
       <div class="bento-icon"><i class="fas fa-globe"></i></div>
       <h3>Web Development</h3>
       <p>Modern, responsive web applications with cutting-edge frameworks and pixel-perfect design.</p>
-      <div class="bento-meta">React · Next.js · Node.js</div>
+      <div class="bento-meta">
+        <span>React</span><span>·</span><span>Next.js</span><span>·</span><span>Node.js</span>
+      </div>
+      <div class="bento-shine"></div>
     </div>
-    <div class="bento-card reveal reveal-delay-2">
+    <div class="bento-card reveal-right" data-tilt>
+      <div class="bento-spotlight"></div>
       <div class="bento-icon"><i class="fas fa-server"></i></div>
       <h3>API Gateway</h3>
       <p>Scalable API infrastructure with intelligent routing, load balancing, and real-time analytics.</p>
-      <div class="bento-meta">REST · GraphQL · WebSocket</div>
+      <div class="bento-meta">
+        <span>REST</span><span>·</span><span>GraphQL</span><span>·</span><span>WebSocket</span>
+      </div>
+      <div class="bento-shine"></div>
     </div>
-    <div class="bento-card wide reveal reveal-delay-1">
+    <div class="bento-card wide reveal-up" data-tilt>
+      <div class="bento-spotlight"></div>
       <div class="bento-icon"><i class="fas fa-robot"></i></div>
       <h3>WhatsApp Bots</h3>
       <p>Powerful conversational bots with 700+ commands. AI-driven messaging automation for businesses and communities.</p>
-      <div class="bento-meta">WhatsApp Business API · Baileys · Node.js</div>
+      <div class="bento-meta">
+        <span>WhatsApp Business API</span><span>·</span><span>Baileys</span><span>·</span><span>Node.js</span>
+      </div>
+      <div class="bento-shine"></div>
     </div>
-    <div class="bento-card reveal reveal-delay-2">
+    <div class="bento-card reveal-left" data-tilt>
+      <div class="bento-spotlight"></div>
       <div class="bento-icon"><i class="fas fa-mobile-alt"></i></div>
       <h3>Mobile Apps</h3>
       <p>Cross-platform mobile experiences with native performance and seamless UX.</p>
-      <div class="bento-meta">React Native · Termux</div>
+      <div class="bento-meta">
+        <span>React Native</span><span>·</span><span>Termux</span>
+      </div>
+      <div class="bento-shine"></div>
     </div>
-    <div class="bento-card reveal reveal-delay-3">
+    <div class="bento-card reveal-right" data-tilt>
+      <div class="bento-spotlight"></div>
       <div class="bento-icon"><i class="fas fa-shield-alt"></i></div>
       <h3>System Architecture</h3>
       <p>High-availability infrastructure design. Millions of requests, zero downtime.</p>
-      <div class="bento-meta">Docker · Vercel · Cloud</div>
+      <div class="bento-meta">
+        <span>Docker</span><span>·</span><span>Vercel</span><span>·</span><span>Cloud</span>
+      </div>
+      <div class="bento-shine"></div>
     </div>
   </div>
 </section>
@@ -155,83 +255,125 @@
      PROJECTS
      ════════════════════════════════════════════════════════════ -->
 <section class="section" id="projects">
-  <div class="section-header reveal">
+  <div class="section-header reveal-up">
     <div class="section-label">03 — Projects</div>
     <h2 class="section-title">Built With Passion</h2>
     <p class="section-subtitle">Five products. One mission. Nothing is impossible.</p>
   </div>
-  <div class="projects-grid">
-    <!-- Nuvuja -->
-    <div class="project-card reveal">
-      <img src="images/Nuvuja-advert.png" alt="Nuvuja" class="project-image">
-      <div class="project-body">
-        <div class="project-header">
-          <h3>Nuvuja</h3>
-          <span class="project-badge live">Live</span>
+  <div class="projects-container">
+    <div class="projects-track" id="projects-track">
+      <!-- Nuvuja -->
+      <div class="project-card reveal-scale" data-tilt>
+        <div class="project-image-wrap">
+          <img src="images/Nuvuja-advert.png" alt="Nuvuja" class="project-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%230a0a1a%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%23d4af37%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Orbitron%22 font-size=%2220%22%3ENUVUJA%3C/text%3E%3C/svg%3E'">
+          <div class="project-image-overlay">
+            <button class="project-expand" onclick="openLightbox('images/Nuvuja-advert.png', 'Nuvuja')"><i class="fas fa-expand"></i></button>
+          </div>
+          <div class="project-image-glitch"></div>
         </div>
-        <p class="project-desc">A next-generation cloud development environment that makes software creation faster, smarter, and more accessible. AI-powered code generation and intelligent autocomplete built directly into the workflow.</p>
-        <div class="project-links">
-          <a href="https://nuvuja.vercel.app" target="_blank" class="plink-visit"><i class="fas fa-external-link-alt"></i> Visit</a>
+        <div class="project-body">
+          <div class="project-header">
+            <h3>Nuvuja</h3>
+            <span class="project-badge live"><i class="fas fa-circle"></i> Live</span>
+          </div>
+          <p class="project-desc">A next-generation cloud development environment that makes software creation faster, smarter, and more accessible. AI-powered code generation and intelligent autocomplete built directly into the workflow.</p>
+          <div class="project-links">
+            <a href="https://nuvuja.vercel.app" target="_blank" class="plink-visit magnetic"><i class="fas fa-external-link-alt"></i> Visit</a>
+          </div>
         </div>
+        <div class="project-card-glow"></div>
+      </div>
+      <!-- Maureonix -->
+      <div class="project-card reveal-scale reveal-delay-1" data-tilt>
+        <div class="project-image-wrap">
+          <img src="images/Maureonix-advert.png" alt="Maureonix" class="project-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%230a0a1a%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%23d4af37%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Orbitron%22 font-size=%2220%22%3EMAUREONIX%3C/text%3E%3C/svg%3E'">
+          <div class="project-image-overlay">
+            <button class="project-expand" onclick="openLightbox('images/Maureonix-advert.png', 'Maureonix')"><i class="fas fa-expand"></i></button>
+          </div>
+          <div class="project-image-glitch"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-header">
+            <h3>Maureonix</h3>
+            <span class="project-badge live"><i class="fas fa-circle"></i> Live</span>
+          </div>
+          <p class="project-desc">An intelligent WhatsApp assistant with 700+ commands. Represented by the brown fox — a symbol of intelligence, adaptability, and limitless capability.</p>
+          <div class="project-links">
+            <a href="https://wa.me/254116903500" target="_blank" class="plink-visit magnetic"><i class="fab fa-whatsapp"></i> Try It</a>
+          </div>
+        </div>
+        <div class="project-card-glow"></div>
+      </div>
+      <!-- Aevibron Gateway -->
+      <div class="project-card reveal-scale reveal-delay-2" data-tilt>
+        <div class="project-image-wrap">
+          <img src="images/Aevibron-gateway.png" alt="Aevibron Gateway" class="project-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%230a0a1a%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%23d4af37%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Orbitron%22 font-size=%2220%22%3EGATEWAY%3C/text%3E%3C/svg%3E'">
+          <div class="project-image-overlay">
+            <button class="project-expand" onclick="openLightbox('images/Aevibron-gateway.png', 'Aevibron Gateway')"><i class="fas fa-expand"></i></button>
+          </div>
+          <div class="project-image-glitch"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-header">
+            <h3>Aevibron Gateway</h3>
+            <span class="project-badge live"><i class="fas fa-circle"></i> Live</span>
+          </div>
+          <p class="project-desc">The unified intelligence layer connecting applications to multiple AI models through one secure API. Intelligent routing, consistent interface, advanced security, and real-time analytics.</p>
+          <div class="project-links">
+            <a href="https://aevibron-gateway.vercel.app" target="_blank" class="plink-visit magnetic"><i class="fas fa-external-link-alt"></i> Visit</a>
+            <button class="plink-api magnetic" onclick="openApiModal()"><i class="fas fa-key"></i> API Key</button>
+          </div>
+        </div>
+        <div class="project-card-glow"></div>
+      </div>
+      <!-- IRIS -->
+      <div class="project-card reveal-scale" data-tilt>
+        <div class="project-image-wrap">
+          <img src="images/Iris-logo.png" alt="IRIS" class="project-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%230a0a1a%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%23d4af37%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Orbitron%22 font-size=%2220%22%3EIRIS%3C/text%3E%3C/svg%3E'">
+          <div class="project-image-overlay">
+            <button class="project-expand" onclick="openLightbox('images/Iris-logo.png', 'IRIS')"><i class="fas fa-expand"></i></button>
+          </div>
+          <div class="project-image-glitch"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-header">
+            <h3>IRIS</h3>
+            <span class="project-badge dev"><i class="fas fa-code"></i> In Dev</span>
+          </div>
+          <p class="project-desc">An autonomous AI Engineer that writes, debugs, and improves code on its own. Self-improving code generation with persistent memory and real-time awareness.</p>
+          <div class="project-links">
+            <span class="project-soon"><i class="fas fa-clock"></i> Coming Soon</span>
+          </div>
+        </div>
+        <div class="project-card-glow"></div>
+      </div>
+      <!-- Kaelum -->
+      <div class="project-card reveal-scale reveal-delay-1" data-tilt>
+        <div class="project-image-wrap">
+          <img src="images/Kaelum-logo.png" alt="Kaelum" class="project-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%230a0a1a%22 width=%22400%22 height=%22200%22/%3E%3Ctext fill=%22%23d4af37%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Orbitron%22 font-size=%2220%22%3EKAELUM%3C/text%3E%3C/svg%3E'">
+          <div class="project-image-overlay">
+            <button class="project-expand" onclick="openLightbox('images/Kaelum-logo.png', 'Kaelum')"><i class="fas fa-expand"></i></button>
+          </div>
+          <div class="project-image-glitch"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-header">
+            <h3>Kaelum</h3>
+            <span class="project-badge personal"><i class="fas fa-lock"></i> Private</span>
+          </div>
+          <p class="project-desc">A Termux-native AI assistant built for mobile developers. Brings powerful AI capabilities directly to your Android terminal without cloud dependency.</p>
+          <div class="project-links">
+            <span class="project-soon"><i class="fas fa-lock"></i> Private Project</span>
+          </div>
+        </div>
+        <div class="project-card-glow"></div>
       </div>
     </div>
-    <!-- Maureonix -->
-    <div class="project-card reveal reveal-delay-1">
-      <img src="images/Maureonix-advert.png" alt="Maureonix" class="project-image">
-      <div class="project-body">
-        <div class="project-header">
-          <h3>Maureonix</h3>
-          <span class="project-badge live">Live</span>
-        </div>
-        <p class="project-desc">An intelligent WhatsApp assistant with 700+ commands. Represented by the brown fox — a symbol of intelligence, adaptability, and limitless capability. AI assistance, automation, entertainment, and group management in one conversation.</p>
-        <div class="project-links">
-          <a href="https://wa.me/254116903500" target="_blank" class="plink-visit"><i class="fab fa-whatsapp"></i> Try It</a>
-        </div>
-      </div>
-    </div>
-    <!-- Aevibron Gateway -->
-    <div class="project-card reveal reveal-delay-2">
-      <img src="images/Aevibron-gateway.png" alt="Aevibron Gateway" class="project-image">
-      <div class="project-body">
-        <div class="project-header">
-          <h3>Aevibron Gateway</h3>
-          <span class="project-badge live">Live</span>
-        </div>
-        <p class="project-desc">The unified intelligence layer connecting applications to multiple AI models through one secure API. Intelligent routing, consistent interface, advanced security, and real-time analytics. Build once, access infinite AI.</p>
-        <div class="project-links">
-          <a href="https://aevibron-gateway.vercel.app" target="_blank" class="plink-visit"><i class="fas fa-external-link-alt"></i> Visit</a>
-          <button class="plink-api" onclick="openApiModal()"><i class="fas fa-key"></i> API Key</button>
-        </div>
-      </div>
-    </div>
-    <!-- IRIS -->
-    <div class="project-card reveal">
-      <img src="images/Iris-logo.png" alt="IRIS" class="project-image">
-      <div class="project-body">
-        <div class="project-header">
-          <h3>IRIS</h3>
-          <span class="project-badge dev">In Development</span>
-        </div>
-        <p class="project-desc">An autonomous AI Engineer that writes, debugs, and improves code on its own. Self-improving code generation with persistent memory and real-time awareness. The future of software development.</p>
-        <div class="project-links">
-          <span style="font-size:11px;color:var(--text-dim);"><i class="fas fa-clock" style="margin-right:4px;"></i>Coming Soon</span>
-        </div>
-      </div>
-    </div>
-    <!-- Kaelum -->
-    <div class="project-card reveal reveal-delay-1">
-      <img src="images/Kaelum-logo.png" alt="Kaelum" class="project-image">
-      <div class="project-body">
-        <div class="project-header">
-          <h3>Kaelum</h3>
-          <span class="project-badge personal">Personal</span>
-        </div>
-        <p class="project-desc">A Termux-native AI assistant built for mobile developers. Brings powerful AI capabilities directly to your Android terminal without cloud dependency. Code anywhere, anytime.</p>
-        <div class="project-links">
-          <span style="font-size:11px;color:var(--text-dim);"><i class="fas fa-lock" style="margin-right:4px;"></i>Private Project</span>
-        </div>
-      </div>
-    </div>
+  </div>
+  <div class="projects-nav">
+    <button class="projects-nav-btn prev" id="projects-prev"><i class="fas fa-chevron-left"></i></button>
+    <div class="projects-dots" id="projects-dots"></div>
+    <button class="projects-nav-btn next" id="projects-next"><i class="fas fa-chevron-right"></i></button>
   </div>
 </section>
 
@@ -239,12 +381,50 @@
      SKILLS
      ════════════════════════════════════════════════════════════ -->
 <section class="section" id="skills">
-  <div class="section-header reveal">
+  <div class="section-header reveal-up">
     <div class="section-label">04 — Skills</div>
-    <h2 class="section-title">Tech Stack</h2>
+    <h2 class="section-title">Tech Arsenal</h2>
     <p class="section-subtitle">Tools and technologies I wield daily.</p>
   </div>
-  <div class="skill-cloud reveal">
+  <div class="skills-container">
+    <div class="skill-category reveal-left">
+      <h4><i class="fas fa-code"></i> Languages</h4>
+      <div class="skill-items">
+        <div class="skill-item" data-level="95"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="90"><span class="skill-name">TypeScript</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="85"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="80"><span class="skill-name">Bash</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-category reveal-right">
+      <h4><i class="fas fa-layer-group"></i> Frameworks</h4>
+      <div class="skill-items">
+        <div class="skill-item" data-level="92"><span class="skill-name">React / Next.js</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="88"><span class="skill-name">Node.js / Express</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="82"><span class="skill-name">React Native</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="90"><span class="skill-name">Tailwind CSS</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-category reveal-left">
+      <h4><i class="fas fa-brain"></i> AI & Data</h4>
+      <div class="skill-items">
+        <div class="skill-item" data-level="94"><span class="skill-name">OpenAI API</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="91"><span class="skill-name">Groq / LLMs</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="87"><span class="skill-name">LangChain</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="85"><span class="skill-name">MongoDB</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-category reveal-right">
+      <h4><i class="fas fa-server"></i> DevOps</h4>
+      <div class="skill-items">
+        <div class="skill-item" data-level="88"><span class="skill-name">Docker</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="93"><span class="skill-name">Vercel / Cloud</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="86"><span class="skill-name">Git / CI/CD</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+        <div class="skill-item" data-level="90"><span class="skill-name">REST / GraphQL</span><div class="skill-bar"><div class="skill-fill"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="skill-cloud reveal-up">
     <div class="skill-tag"><i class="fab fa-js"></i>JavaScript</div>
     <div class="skill-tag"><i class="fas fa-code"></i>TypeScript</div>
     <div class="skill-tag"><i class="fab fa-python"></i>Python</div>
@@ -272,99 +452,127 @@
      EXPERIENCE
      ════════════════════════════════════════════════════════════ -->
 <section class="section" id="experience">
-  <div class="section-header reveal">
+  <div class="section-header reveal-up">
     <div class="section-label">05 — Experience</div>
     <h2 class="section-title">The Journey</h2>
     <p class="section-subtitle">Three years. One hundred projects. Infinite growth.</p>
   </div>
   <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-role">Founder & Lead AI Architect</div>
-      <div class="timeline-company">Infinite Vybeflix / Aevibron</div>
-      <div class="timeline-date">2022 — PRESENT</div>
-      <div class="timeline-desc">Built AI infrastructure handling 1M+ requests per minute. Architected and launched 5+ production AI products including Nuvuja IDE, Aevibron Gateway, and Maureonix WhatsApp Bot. Designed scalable multi-provider AI routing with load balancing, key management, and real-time analytics.</div>
+    <div class="timeline-line" id="timeline-line"></div>
+    <div class="timeline-item reveal-left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Founder & Lead AI Architect</div>
+        <div class="timeline-company">Infinite Vybeflix / Aevibron</div>
+        <div class="timeline-date">2022 — PRESENT</div>
+        <div class="timeline-desc">Built AI infrastructure handling 1M+ requests per minute. Architected and launched 5+ production AI products including Nuvuja IDE, Aevibron Gateway, and Maureonix WhatsApp Bot.</div>
+      </div>
     </div>
-    <div class="timeline-item reveal reveal-delay-1">
-      <div class="timeline-role">AI Systems Engineer</div>
-      <div class="timeline-company">Freelance</div>
-      <div class="timeline-date">2021 — 2022</div>
-      <div class="timeline-desc">Delivered custom AI-powered solutions for clients across industries worldwide. Built intelligent chatbots, automation pipelines, and data processing systems. Specialized in natural language processing and conversational AI.</div>
+    <div class="timeline-item reveal-right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">AI Systems Engineer</div>
+        <div class="timeline-company">Freelance</div>
+        <div class="timeline-date">2021 — 2022</div>
+        <div class="timeline-desc">Delivered custom AI-powered solutions for clients across industries worldwide. Built intelligent chatbots, automation pipelines, and data processing systems.</div>
+      </div>
     </div>
-    <div class="timeline-item reveal reveal-delay-2">
-      <div class="timeline-role">Full-Stack Developer</div>
-      <div class="timeline-company">Self-Directed</div>
-      <div class="timeline-date">2020 — 2021</div>
-      <div class="timeline-desc">Completed 100+ projects to master the modern development stack. Built web apps, APIs, mobile interfaces, and automation tools. Developed deep expertise in JavaScript, Python, React, Node.js, and cloud infrastructure through relentless hands-on practice. Zero formal training, 100% passion-driven.</div>
+    <div class="timeline-item reveal-left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-role">Full-Stack Developer</div>
+        <div class="timeline-company">Self-Directed</div>
+        <div class="timeline-date">2020 — 2021</div>
+        <div class="timeline-desc">Completed 100+ projects to master the modern development stack. Zero formal training, 100% passion-driven.</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
-     CONTACT
+     CONTACT — HOLOGRAPHIC TERMINAL
      ════════════════════════════════════════════════════════════ -->
 <section class="section" id="contact">
-  <div class="section-header reveal">
+  <div class="section-header reveal-up">
     <div class="section-label">06 — Contact</div>
-    <h2 class="section-title">Let's Connect</h2>
-    <p class="section-subtitle">Available for freelance, contract, and full-time opportunities.</p>
+    <h2 class="section-title">Initialize Connection</h2>
+    <p class="section-subtitle">Secure channel open. Transmit your message.</p>
   </div>
-  <div class="contact-grid">
-    <div class="contact-info reveal">
-      <h3>Get in Touch</h3>
-      <p>Have a project in mind? Want to collaborate? Or just want to say hello? I'm always open to discussing new opportunities and ideas.</p>
-      <div class="contact-item">
-        <i class="fas fa-envelope"></i>
-        <div class="ci-text">
-          <span class="ci-label">Email</span>
-          <a href="mailto:aevibron@gmail.com" class="ci-value">aevibron@gmail.com</a>
+  <div class="contact-wrapper">
+    <div class="contact-terminal reveal-left">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span></span><span></span><span></span>
         </div>
+        <div class="terminal-title">aevibron@infinite-vybeflix:~$</div>
       </div>
-      <div class="contact-item">
-        <i class="fab fa-whatsapp"></i>
-        <div class="ci-text">
-          <span class="ci-label">WhatsApp</span>
-          <a href="https://wa.me/254116903500" target="_blank" class="ci-value">+254 116 903 500</a>
+      <div class="terminal-body">
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-cmd">cat contact_info.json</span>
         </div>
-      </div>
-      <div class="contact-item">
-        <i class="fas fa-map-marker-alt"></i>
-        <div class="ci-text">
-          <span class="ci-label">Location</span>
-          <span class="ci-value">We work online anywhere anytime</span>
+        <div class="terminal-output">
+          <div class="terminal-item">
+            <span class="terminal-key">"email"</span>
+            <span class="terminal-sep">:</span>
+            <a href="mailto:aevibron@gmail.com" class="terminal-value">"aevibron@gmail.com"</a>
+          </div>
+          <div class="terminal-item">
+            <span class="terminal-key">"whatsapp"</span>
+            <span class="terminal-sep">:</span>
+            <a href="https://wa.me/254116903500" target="_blank" class="terminal-value">"+254 116 903 500"</a>
+          </div>
+          <div class="terminal-item">
+            <span class="terminal-key">"location"</span>
+            <span class="terminal-sep">:</span>
+            <span class="terminal-value">"Online — Anywhere, Anytime"</span>
+          </div>
+          <div class="terminal-item">
+            <span class="terminal-key">"response"</span>
+            <span class="terminal-sep">:</span>
+            <span class="terminal-value">"&lt; 24 hours"</span>
+          </div>
+          <div class="terminal-item">
+            <span class="terminal-key">"channel"</span>
+            <span class="terminal-sep">:</span>
+            <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="terminal-value">"Join WhatsApp Channel"</a>
+          </div>
         </div>
-      </div>
-      <div class="contact-item">
-        <i class="fas fa-clock"></i>
-        <div class="ci-text">
-          <span class="ci-label">Response Time</span>
-          <span class="ci-value">Within 24 hours</span>
-        </div>
-      </div>
-      <div class="contact-item">
-        <i class="fas fa-broadcast-tower"></i>
-        <div class="ci-text">
-          <span class="ci-label">WhatsApp Channel</span>
-          <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="ci-value">Join Channel</a>
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-cmd typing-cmd">await connection.establish()</span>
+          <span class="typing-cursor">|</span>
         </div>
       </div>
     </div>
-    <div class="contact-form reveal reveal-delay-1">
-      <h3>Send a Message</h3>
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" placeholder="John Doe" id="form-name">
+    <div class="contact-form-wrapper reveal-right">
+      <div class="contact-form-glow"></div>
+      <div class="contact-form">
+        <div class="form-header">
+          <div class="form-icon"><i class="fas fa-satellite-dish"></i></div>
+          <h3>Transmit Message</h3>
+          <p>All fields encrypted via WhatsApp</p>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> Identity</label>
+          <input type="text" placeholder="Your name or codename" id="form-name">
+          <div class="form-line"></div>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-at"></i> Frequency</label>
+          <input type="email" placeholder="your@email.com" id="form-email">
+          <div class="form-line"></div>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-comment-dots"></i> Payload</label>
+          <textarea placeholder="Describe your mission..." id="form-message"></textarea>
+          <div class="form-line"></div>
+        </div>
+        <button class="btn-transmit magnetic" onclick="sendMessage()">
+          <span class="btn-text"><i class="fab fa-whatsapp" style="color:#25D366;"></i> Transmit via WhatsApp</span>
+          <span class="btn-particles"></span>
+        </button>
       </div>
-      <div class="form-group">
-        <label>Your Email</label>
-        <input type="email" placeholder="john@example.com" id="form-email">
-      </div>
-      <div class="form-group">
-        <label>Your Message</label>
-        <textarea placeholder="Tell me about your project..." id="form-message"></textarea>
-      </div>
-      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="sendMessage()">
-        <i class="fab fa-whatsapp"></i> Send via WhatsApp
-      </button>
     </div>
   </div>
 </section>
@@ -373,9 +581,26 @@
      FOOTER
      ════════════════════════════════════════════════════════════ -->
 <footer class="footer">
-  <div class="footer-brand">AEVIBRON</div>
-  <div class="footer-tagline">Eternal Vibration Particle — Nothing is impossible.</div>
-  <div class="footer-copy">&copy; 2026 Infinite Vybeflix. All rights reserved.</div>
+  <div class="footer-waves">
+    <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="rgba(212,175,55,0.03)"/>
+      <path d="M0 120L60 115C120 110 240 100 360 95C480 90 600 90 720 92C840 94 960 98 1080 100C1200 102 1320 102 1380 102L1440 102V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="rgba(212,175,55,0.05)"/>
+    </svg>
+  </div>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <span class="footer-brand-text">AEVIBRON</span>
+      <div class="footer-brand-line"></div>
+    </div>
+    <div class="footer-tagline">Eternal Vibration Particle — Nothing is impossible.</div>
+    <div class="footer-social">
+      <a href="mailto:aevibron@gmail.com" class="footer-social-link magnetic"><i class="fas fa-envelope"></i></a>
+      <a href="https://wa.me/254116903500" target="_blank" class="footer-social-link magnetic"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://github.com/luckyfelistine-bot" target="_blank" class="footer-social-link magnetic"><i class="fab fa-github"></i></a>
+      <a href="https://whatsapp.com/channel/0029Vb7IABxCXC3J7ZFFsk2h" target="_blank" class="footer-social-link magnetic"><i class="fas fa-broadcast-tower"></i></a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Infinite Vybeflix. All rights reserved.</div>
+  </div>
 </footer>
 
 <!-- ════════════════════════════════════════════════════════════
@@ -383,14 +608,38 @@
      ════════════════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="api-modal">
   <div class="modal-box">
-    <div class="modal-close" onclick="closeApiModal()"><i class="fas fa-times"></i></div>
-    <h3 style="font-family:'Cinzel',serif;font-size:18px;color:var(--gold);margin-bottom:12px;text-align:center;">Request API Access</h3>
-    <p style="font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:16px;text-align:center;">Due to security considerations (1M requests/minute capacity), API keys are provided on a case-by-case basis.</p>
-    <textarea class="modal-input" id="api-usecase" rows="3" placeholder="What do you want to use the API for?"></textarea>
-    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="requestApiKey()">
-      <i class="fab fa-whatsapp"></i> Request via WhatsApp
+    <div class="modal-close magnetic" onclick="closeApiModal()"><i class="fas fa-times"></i></div>
+    <div class="modal-icon"><i class="fas fa-shield-alt"></i></div>
+    <h3>Request API Access</h3>
+    <p>Due to security considerations (1M requests/minute capacity), API keys are provided on a case-by-case basis.</p>
+    <div class="modal-input-wrap">
+      <textarea id="api-usecase" rows="3" placeholder="What do you want to use the API for?"></textarea>
+      <div class="modal-input-line"></div>
+    </div>
+    <button class="btn-primary magnetic" style="width:100%;justify-content:center;" onclick="requestApiKey()">
+      <i class="fab fa-whatsapp" style="color:#25D366;"></i> Request via WhatsApp
     </button>
   </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     LIGHTBOX
+     ════════════════════════════════════════════════════════════ -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <img src="" alt="" id="lightbox-img">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     TOAST
+     ════════════════════════════════════════════════════════════ -->
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i>
+  <span id="toast-msg">Message sent!</span>
 </div>
 
 <script src="script.js"></script>
